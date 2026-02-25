@@ -85,11 +85,6 @@ class="flex flex-col items-center justify-center w-full mt-6 gap-3"></div>
 
 </div>
 
-<div class="absolute inset-0 flex z-30 pointer-events-none">
-<div class="w-1/3 h-full pointer-events-auto" onclick="prevSlide()"></div>
-<div class="w-2/3 h-full pointer-events-auto" onclick="nextSlide()"></div>
-</div>
-
 </div>
 
 <script>
@@ -98,7 +93,7 @@ const slides=[
 {
 title:"¿Sientes el Peso?",
 subtitle:"Cuando el dinero no alcanza.",
-text:"Trabajas. Te esfuerzas. Cumples. Y aun así sientes que el dinero se evapora. Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad. Es el resultado de no tener control real.",
+text:"Trabajas. Te esfuerzas. Cumples. Y aun así sientes que el dinero se evapora. Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.",
 icon:"clock",
 badge:"EL PESO DIARIO",
 image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
@@ -106,7 +101,7 @@ image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&
 {
 title:"La Trampa del Ciclo",
 subtitle:"Trabajar solo para pagar.",
-text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento. Sin avance real. El sistema tradicional no está diseñado para que avances, está diseñado para que sobrevivas.",
+text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento real.",
 icon:"lock",
 badge:"EL CICLO",
 image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
@@ -114,31 +109,15 @@ image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit
 {
 title:"Tu Nuevo Mapa",
 subtitle:"Regla 50-30-20.",
-text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre. Cada decisión se vuelve estratégica. Empiezas a liderar tus finanzas.",
+text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre.",
 icon:"brain-circuit",
 badge:"HÁBITOS PRO",
 image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
 },
 {
-title:"Adiós al Estrés",
-subtitle:"Sistema inteligente.",
-text:"Imagina revisar tu celular y sentir tranquilidad. Saber que puedes gastar sin culpa. La paz financiera no es suerte. Es estructura.",
-icon:"coins",
-badge:"SOLUCIÓN",
-image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
-},
-{
-title:"Paz en Tiempo Real",
-subtitle:"Visualiza tu progreso.",
-text:"Cuando ves tu avance crecer, algo cambia en tu mente. La confianza reemplaza el miedo. El control reemplaza el caos.",
-icon:"layout-dashboard",
-badge:"CLARIDAD",
-image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
-},
-{
 title:"Con Finance PRO todo esto es posible",
 subtitle:"La decisión está en tus manos.",
-text:"No es motivación. Es método. No es esperanza. Es estrategia. Hoy puedes decidir cambiar tu relación con el dinero para siempre.",
+text:"No es motivación. Es método. No es esperanza. Es estrategia.",
 icon:"rocket",
 badge:"TU MOMENTO",
 type:"cta",
@@ -182,7 +161,7 @@ cta.innerHTML="";
 
 if(slide.type==="cta"){
 cta.innerHTML=`
-<a href="https://my-finance-pro.web.app/" target="_blank" rel="noopener"
+<a href="https://my-finance-pro.web.app/" target="_self"
 class="premium-button bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 transition-all text-lg border border-white/20">
 Sí, Quiero Tomar el Control Definitivo
 <i data-lucide="arrow-right" class="w-6 h-6"></i>
@@ -210,6 +189,22 @@ progress=0;
 updateSlide();
 }
 }
+
+document.addEventListener("click", function(e){
+
+if(e.target.closest("a") || e.target.closest("button")){
+return;
+}
+
+const width = window.innerWidth;
+
+if(e.clientX < width/2){
+prevSlide();
+} else {
+nextSlide();
+}
+
+});
 
 setInterval(()=>{
 progress+=step;
