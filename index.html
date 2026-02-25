@@ -59,17 +59,17 @@ class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden 
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<div class="flex-1 flex flex-col justify-between items-center text-center px-6 pt-20 pb-10 relative z-10">
+<div class="flex-1 flex flex-col justify-between items-center text-center px-8 pt-24 pb-12 relative z-10">
 
-<div class="flex flex-col items-center gap-4">
+<div class="flex flex-col items-center gap-6">
 <span id="badge"
 class="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-[10px] font-black tracking-[0.3em] uppercase text-white backdrop-blur-md"></span>
 
 <div id="icon-container"
-class="h-16 sm:h-20 flex items-center justify-center text-white"></div>
+class="h-24 flex items-center justify-center text-white"></div>
 </div>
 
-<div class="flex flex-col gap-4 max-w-md">
+<div class="flex flex-col gap-6 max-w-md items-center text-center">
 <h1 id="title"
 class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white"></h1>
 
@@ -77,11 +77,11 @@ class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl 
 class="font-bold text-white text-base sm:text-lg md:text-xl"></h2>
 
 <p id="description"
-class="text-white/80 leading-relaxed text-sm sm:text-base"></p>
+class="text-white/80 leading-relaxed text-sm sm:text-base max-w-sm"></p>
 </div>
 
 <div id="cta-container"
-class="flex flex-col items-center justify-center w-full mt-6 gap-3"></div>
+class="flex flex-col items-center justify-center w-full mt-8 gap-3"></div>
 
 </div>
 
@@ -169,7 +169,7 @@ document.getElementById("subtitle").innerText=slide.subtitle;
 document.getElementById("description").innerText=slide.text;
 
 document.getElementById("icon-container").innerHTML=
-`<i data-lucide="${slide.icon}" class="w-12 h-12 sm:w-16 sm:h-16 animate-pulse"></i>`;
+`<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
 lucide.createIcons();
 
 const cta=document.getElementById("cta-container");
@@ -207,17 +207,10 @@ updateSlide();
 }
 
 document.addEventListener("click", function(e){
-
 if(e.target.closest("a")) return;
-
 const width = window.innerWidth;
-
-if(e.clientX < width/2){
-prevSlide();
-} else {
-nextSlide();
-}
-
+if(e.clientX < width/2){ prevSlide(); }
+else{ nextSlide(); }
 });
 
 setInterval(()=>{
