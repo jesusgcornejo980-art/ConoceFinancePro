@@ -93,7 +93,7 @@ const slides=[
 {
 title:"¿Sientes el Peso?",
 subtitle:"Cuando el dinero no alcanza.",
-text:"Trabajas. Te esfuerzas. Cumples. Y aun así sientes que el dinero se evapora. Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.",
+text:"Trabajas. Te esfuerzas. Cumples. Y aun así sientes que el dinero se evapora. Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad. Es el resultado de no tener control real.",
 icon:"clock",
 badge:"EL PESO DIARIO",
 image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
@@ -101,7 +101,7 @@ image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&
 {
 title:"La Trampa del Ciclo",
 subtitle:"Trabajar solo para pagar.",
-text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento real.",
+text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento. Sin avance real.",
 icon:"lock",
 badge:"EL CICLO",
 image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
@@ -109,15 +109,31 @@ image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit
 {
 title:"Tu Nuevo Mapa",
 subtitle:"Regla 50-30-20.",
-text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre.",
+text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre. Cada decisión se vuelve estratégica.",
 icon:"brain-circuit",
 badge:"HÁBITOS PRO",
 image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
 },
 {
+title:"Adiós al Estrés",
+subtitle:"Sistema inteligente.",
+text:"Imagina revisar tu celular y sentir tranquilidad. Saber que puedes gastar sin culpa.",
+icon:"coins",
+badge:"SOLUCIÓN",
+image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Paz en Tiempo Real",
+subtitle:"Visualiza tu progreso.",
+text:"Cuando ves tu avance crecer, algo cambia en tu mente. La confianza reemplaza el miedo.",
+icon:"layout-dashboard",
+badge:"CLARIDAD",
+image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+},
+{
 title:"Con Finance PRO todo esto es posible",
 subtitle:"La decisión está en tus manos.",
-text:"No es motivación. Es método. No es esperanza. Es estrategia.",
+text:"No es motivación. Es método. No es esperanza. Es estrategia. Hoy puedes decidir cambiar tu relación con el dinero para siempre.",
 icon:"rocket",
 badge:"TU MOMENTO",
 type:"cta",
@@ -192,9 +208,7 @@ updateSlide();
 
 document.addEventListener("click", function(e){
 
-if(e.target.closest("a") || e.target.closest("button")){
-return;
-}
+if(e.target.closest("a")) return;
 
 const width = window.innerWidth;
 
