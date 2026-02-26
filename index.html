@@ -113,16 +113,18 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 </div>
 
 </div>
-
 </div>
 </div>
 </div>
 
 <script>
 
-// ⚠️ DEJA TU ARRAY slides EXACTAMENTE COMO LO TENÍAS
+/* ⚠️ IMPORTANTE:
+   MANTÉN AQUÍ TU ARRAY ORIGINAL COMPLETO
+   NO LO BORRES NI LO VACÍES
+*/
 const slides = [
-  // TU CONTENIDO ORIGINAL AQUÍ (NO CAMBIA)
+    // 👉 PEGA AQUÍ TU ARRAY ORIGINAL EXACTO
 ];
 
 let currentSlide=0;
@@ -156,13 +158,16 @@ else{ bar.style.width="0%"; }
 }
 
 function updateSlide(){
+
+if(!slides[currentSlide]) return; // 🔥 evita pantalla negra
+
 progress=0;
 const slide=slides[currentSlide];
 
-document.getElementById("bg-image").src=slide.image;
-document.getElementById("badge").innerText=slide.badge;
-document.getElementById("title").innerText=slide.title;
-document.getElementById("description").innerText=slide.text;
+document.getElementById("bg-image").src=slide.image || "";
+document.getElementById("badge").innerText=slide.badge || "";
+document.getElementById("title").innerText=slide.title || "";
+document.getElementById("description").innerText=slide.text || "";
 
 document.getElementById("icon-container").innerHTML=
 `<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
@@ -172,9 +177,9 @@ const wrapper=document.getElementById("content-wrapper");
 const topBlock=document.getElementById("top-block");
 const bottomBlock=document.getElementById("bottom-block");
 
-// 🔁 RESTABLECER ESTADO NORMAL (TODAS LAS PANTALLAS)
-wrapper.classList.add("justify-between");
+// RESTABLECER ESTADO NORMAL
 wrapper.classList.remove("justify-center");
+wrapper.classList.add("justify-between");
 
 topBlock.classList.remove("flex-1","justify-end");
 bottomBlock.classList.remove("flex-1","justify-start");
@@ -183,7 +188,7 @@ document.getElementById("highlight-text").classList.add("hidden");
 document.getElementById("cta-button").classList.add("hidden");
 document.getElementById("cta-subtext").classList.add("hidden");
 
-// ✅ SOLO ÚLTIMA PANTALLA
+// SOLO ÚLTIMA PANTALLA
 if(slide.type==="cta"){
 
 wrapper.classList.remove("justify-between");
