@@ -6,6 +6,7 @@
 <title>Finance Pro</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/feather-icons"></script>
 
 <style>
 *{
@@ -51,7 +52,7 @@ body,html{
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:28px; /* Espacio uniforme */
+    gap:28px;
 }
 
 .badge{
@@ -63,9 +64,20 @@ body,html{
     color:white;
 }
 
-.icon{
-    font-size:60px;
-    opacity:.9;
+/* ICONOS TRANSPARENTES */
+.icon svg{
+    width:70px;
+    height:70px;
+    stroke:white;
+    stroke-width:1.5;
+    fill:none;
+    opacity:.85;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{ transform:translateY(0px); }
+    50%{ transform:translateY(-8px); }
 }
 
 h1{
@@ -119,7 +131,7 @@ button:hover{
 <div class="overlay"></div>
 <div class="content">
 <div class="badge">EL CICLO</div>
-<div class="icon">🔒</div>
+<div class="icon"><i data-feather="lock"></i></div>
 <h1>La Trampa del Ciclo</h1>
 <div class="subtitle">Trabajar solo para pagar.</div>
 <div class="text">
@@ -130,11 +142,11 @@ Sin ahorro sólido. Sin crecimiento. Sin avance real.
 </section>
 
 <!-- 2 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f'); transform:translateY(100%);">
+<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f'); transform:translateX(100%);">
 <div class="overlay"></div>
 <div class="content">
 <div class="badge">EL PROBLEMA</div>
-<div class="icon">📉</div>
+<div class="icon"><i data-feather="trending-down"></i></div>
 <h1>No es falta de dinero</h1>
 <div class="text">
 Es falta de estrategia.
@@ -144,11 +156,11 @@ Sin claridad financiera, cada mes empieza en cero.
 </section>
 
 <!-- 3 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a'); transform:translateY(200%);">
+<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a'); transform:translateX(200%);">
 <div class="overlay"></div>
 <div class="content">
 <div class="badge">CONCIENCIA</div>
-<div class="icon">🧠</div>
+<div class="icon"><i data-feather="activity"></i></div>
 <h1>Lo que no mides</h1>
 <div class="text">
 No mejora.
@@ -158,11 +170,11 @@ Tus decisiones diarias construyen o destruyen tu libertad.
 </section>
 
 <!-- 4 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1507679799987-c73779587ccf'); transform:translateY(300%);">
+<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1507679799987-c73779587ccf'); transform:translateX(300%);">
 <div class="overlay"></div>
 <div class="content">
 <div class="badge">EL CAMBIO</div>
-<div class="icon">📊</div>
+<div class="icon"><i data-feather="bar-chart-2"></i></div>
 <h1>Un sistema simple</h1>
 <div class="text">
 Que te dice cuánto gastar, cuánto ahorrar
@@ -172,11 +184,11 @@ y cómo avanzar sin estrés.
 </section>
 
 <!-- 5 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c'); transform:translateY(400%);">
+<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c'); transform:translateX(400%);">
 <div class="overlay"></div>
 <div class="content">
 <div class="badge">TU NUEVO MANTRA</div>
-<div class="icon">🔥</div>
+<div class="icon"><i data-feather="zap"></i></div>
 <h1>Disciplina supera motivación</h1>
 <div class="text">
 No necesitas más ganas.
@@ -185,12 +197,12 @@ Necesitas un método.
 </div>
 </section>
 
-<!-- 6 FINAL -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f'); transform:translateY(500%);">
+<!-- 6 -->
+<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f'); transform:translateX(500%);">
 <div class="overlay"></div>
 <div class="content">
 <div class="badge">TU MOMENTO</div>
-<div class="icon">🚀</div>
+<div class="icon"><i data-feather="rocket"></i></div>
 <h1>Con Finance PRO todo esto es posible</h1>
 
 <div class="text">
@@ -210,14 +222,16 @@ Conocer Finance PRO
 </section>
 
 <script>
+feather.replace();
+
 let current=0;
 const screens=document.querySelectorAll('.screen');
 
 document.addEventListener('click',()=>{
 if(current<screens.length-1){
-screens[current].style.transform="translateY(-100%)";
+screens[current].style.transform="translateX(-100%)";
 current++;
-screens[current].style.transform="translateY(0)";
+screens[current].style.transform="translateX(0)";
 }
 });
 </script>
