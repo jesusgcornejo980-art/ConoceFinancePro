@@ -3,12 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance PRO</title>
+<title>Finance PRO - Control Total</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
 body{
     font-family:'Inter',sans-serif;
     background:#000;
@@ -28,18 +30,26 @@ body{
     }
 }
 
+@keyframes subtle-zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+.animate-zoom{
+    animation:subtle-zoom 12s linear infinite;
+}
+
 .progress-bar{
     transition:width 40ms linear;
 }
 
-.premium-button{
-    animation:pulse 2.5s infinite;
+@keyframes premiumPulse{
+    0%{box-shadow:0 0 25px rgba(139,92,246,.4);}
+    50%{box-shadow:0 0 60px rgba(139,92,246,1);}
+    100%{box-shadow:0 0 25px rgba(139,92,246,.4);}
 }
 
-@keyframes pulse{
-0%{box-shadow:0 0 25px rgba(139,92,246,.4);}
-50%{box-shadow:0 0 60px rgba(139,92,246,1);}
-100%{box-shadow:0 0 25px rgba(139,92,246,.4);}
+.premium-button{
+    animation:premiumPulse 2.5s ease-in-out infinite;
 }
 </style>
 </head>
@@ -47,51 +57,50 @@ body{
 <body class="flex items-center justify-center min-h-screen p-4">
 
 <div id="main-container"
-class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden border border-white/10 flex flex-col">
+class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col">
 
-<!-- Fondo -->
-<div class="absolute inset-0 z-0">
-<img id="bg-image" class="w-full h-full object-cover">
-<div class="absolute inset-0 bg-black/70"></div>
+<div class="absolute inset-0 z-0 pointer-events-none">
+<img id="bg-image" class="w-full h-full object-cover animate-zoom">
+<div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
 </div>
 
-<!-- Progress -->
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<!-- Contenido -->
 <div class="flex-1 relative z-10 px-8 py-16 flex">
-<div id="content-wrapper"
-class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full">
+<div class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full">
 
-<div id="top-block" class="flex flex-col items-center gap-8">
+<div class="flex flex-col items-center gap-8">
 
 <span id="badge"
-class="h-8 px-6 flex items-center justify-center rounded-full bg-purple-600 text-[10px] font-black tracking-[0.3em] uppercase text-white">
+class="h-8 px-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white whitespace-nowrap">
 </span>
 
-<div id="icon-container" class="text-white"></div>
+<div id="icon-container"
+class="flex items-center justify-center text-white"></div>
 
 <h1 id="title"
-class="font-black text-4xl text-white"></h1>
+class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white">
+</h1>
 
 <p id="description"
-class="text-white/80 whitespace-pre-line"></p>
+class="text-white/80 leading-relaxed text-sm sm:text-base whitespace-pre-line">
+</p>
 
 </div>
 
-<div id="bottom-block"
-class="flex flex-col items-center gap-4 w-full min-h-[160px] justify-end">
+<div class="flex flex-col items-center gap-4 w-full min-h-[160px] justify-end">
 
 <p id="highlight-text"
-class="text-white font-bold hidden">
+class="text-white font-bold text-base sm:text-lg hidden">
 Empieza a ver resultados reales con FINANCE PRO
 </p>
 
 <a id="cta-button"
-href="#"
-class="premium-button hidden bg-purple-600 text-white font-black py-4 px-10 rounded-full">
+href="https://my-finance-pro.web.app/"
+class="premium-button hidden bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 transition-all text-lg border border-white/20">
 Conocer Finance PRO
+<i data-lucide="arrow-right" class="w-6 h-6"></i>
 </a>
 
 <div id="cta-subtext"
@@ -100,73 +109,62 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 </div>
 
 </div>
+
 </div>
 </div>
 </div>
 
 <script>
 
-/* ===== 6 PANTALLAS ===== */
-
-const slides = [
-
+const slides=[
 {
-image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d",
+title:"¿Sientes el Peso?",
+text:"•Trabajas             •Te esfuerzas\n•Luchas                •Cumples\n\nY aun así sientes que el dinero no alcanza.\nEsa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real.",
+icon:"clock",
+badge:"EL PESO DIARIO",
+image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"La Trampa del Ciclo",
+text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento. Sin avance real.",
+icon:"refresh-cw",
 badge:"EL CICLO",
-icon:"refresh-ccw",
-title:"Vives el mismo ciclo",
-text:"Trabajas      Te esfuerzas\nLuchas          Cumples"
+image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
 },
-
 {
-image:"https://images.unsplash.com/photo-1526304640581-d334cdbbf45e",
-badge:"REALIDAD",
-icon:"alert-triangle",
-title:"Y aun así sientes que el dinero no alcanza.",
-text:"Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real."
+title:"Tu Nuevo Mantra",
+text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre. Cada decisión se vuelve estratégica.",
+icon:"brain-circuit",
+badge:"HÁBITOS PRO",
+image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
 },
-
 {
-image:"https://images.unsplash.com/photo-1508385082359-f38ae991e8f2",
-badge:"PROBLEMA",
-icon:"lock",
-title:"No es falta de dinero",
-text:"Es falta de estructura.\nSin sistema, siempre vuelves al mismo punto."
-},
-
-{
-image:"https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+title:"Adiós al Estrés",
+text:"Nuestro sistema 50-30-20\n\nImagina revisar tu celular y sentir tranquilidad. Saber que puedes gastar sin culpa.",
+icon:"coins",
 badge:"SOLUCIÓN",
-icon:"pie-chart",
-title:"Nuestro sistema 50-30-20",
-text:"50% necesidades\n30% estilo de vida\n20% inversión y crecimiento"
+image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
 },
-
 {
-image:"https://images.unsplash.com/photo-1485217988980-11786ced9454",
-badge:"DECISIÓN",
-icon:"trending-up",
+title:"Paz en Tiempo Real",
+text:"Cuando ves tu avance crecer, algo cambia en tu mente. La confianza reemplaza el miedo.",
+icon:"layout-dashboard",
+badge:"CLARIDAD",
+image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+},
+{
 title:"Con Finance PRO todo esto es posible",
-text:"Organización.\nControl.\nCrecimiento."
-},
-
-{
-image:"https://images.unsplash.com/photo-1507679799987-c73779587ccf",
+text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.",
+icon:"rocket",
 badge:"TU MOMENTO",
-icon:"target",
-title:"Intención sin acción no tiene valor.",
-text:"La intención no crea libertad financiera, el movimiento que haces hoy, sí.",
-type:"cta"
+type:"cta",
+image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
 }
-
 ];
-
-
-/* ===== SISTEMA ===== */
 
 let currentSlide=0;
 let progress=0;
-const duration=7000;
+const duration=9000;
 const step=(40/duration)*100;
 
 function initBars(){
@@ -195,7 +193,6 @@ else{ bar.style.width="0%"; }
 }
 
 function updateSlide(){
-
 progress=0;
 const slide=slides[currentSlide];
 
@@ -205,42 +202,37 @@ document.getElementById("title").innerText=slide.title;
 document.getElementById("description").innerText=slide.text;
 
 document.getElementById("icon-container").innerHTML=
-`<i data-lucide="${slide.icon}" class="w-20 h-20 animate-pulse"></i>`;
+`<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
 lucide.createIcons();
 
-const wrapper=document.getElementById("content-wrapper");
-const topBlock=document.getElementById("top-block");
-const bottomBlock=document.getElementById("bottom-block");
-
-/* RESET NORMAL */
-wrapper.classList.remove("justify-center");
-wrapper.classList.add("justify-between");
-
-topBlock.classList.remove("flex-1","justify-end");
-bottomBlock.classList.remove("flex-1","justify-start");
-
-document.getElementById("highlight-text").classList.add("hidden");
-document.getElementById("cta-button").classList.add("hidden");
-document.getElementById("cta-subtext").classList.add("hidden");
-
-/* SOLO ÚLTIMA PANTALLA */
-if(slide.type==="cta"){
-
-wrapper.classList.remove("justify-between");
-wrapper.classList.add("justify-center");
-
-topBlock.classList.add("flex-1","justify-end");
-bottomBlock.classList.add("flex-1","justify-start");
-
-document.getElementById("highlight-text").classList.remove("hidden");
-document.getElementById("cta-button").classList.remove("hidden");
-document.getElementById("cta-subtext").classList.remove("hidden");
-}
+document.getElementById("highlight-text").classList.toggle("hidden", slide.type!=="cta");
+document.getElementById("cta-button").classList.toggle("hidden", slide.type!=="cta");
+document.getElementById("cta-subtext").classList.toggle("hidden", slide.type!=="cta");
 
 updateProgressUI();
 }
 
-/* AUTO AVANCE */
+function nextSlide(){
+if(currentSlide<slides.length-1){
+currentSlide++;
+updateSlide();
+}
+}
+
+function prevSlide(){
+if(currentSlide>0){
+currentSlide--;
+updateSlide();
+}
+}
+
+document.addEventListener("click", function(e){
+if(e.target.closest("a")) return;
+const width = window.innerWidth;
+if(e.clientX < width/2){ prevSlide(); }
+else{ nextSlide(); }
+});
+
 setInterval(()=>{
 if(currentSlide >= slides.length-1 && progress>=100) return;
 
