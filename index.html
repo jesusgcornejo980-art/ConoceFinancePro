@@ -9,8 +9,6 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-
 body{
     font-family:'Inter',sans-serif;
     background:#000;
@@ -30,26 +28,18 @@ body{
     }
 }
 
-@keyframes subtle-zoom{
-    from{transform:scale(1);}
-    to{transform:scale(1.1);}
-}
-.animate-zoom{
-    animation:subtle-zoom 12s linear infinite;
-}
-
 .progress-bar{
     transition:width 40ms linear;
 }
 
-@keyframes premiumPulse{
-    0%{box-shadow:0 0 25px rgba(139,92,246,.4);}
-    50%{box-shadow:0 0 60px rgba(139,92,246,1);}
-    100%{box-shadow:0 0 25px rgba(139,92,246,.4);}
+.premium-button{
+    animation:pulse 2.5s infinite;
 }
 
-.premium-button{
-    animation:premiumPulse 2.5s ease-in-out infinite;
+@keyframes pulse{
+0%{box-shadow:0 0 25px rgba(139,92,246,.4);}
+50%{box-shadow:0 0 60px rgba(139,92,246,1);}
+100%{box-shadow:0 0 25px rgba(139,92,246,.4);}
 }
 </style>
 </head>
@@ -57,60 +47,52 @@ body{
 <body class="flex items-center justify-center min-h-screen p-4">
 
 <div id="main-container"
-class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col">
+class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden border border-white/10 flex flex-col">
 
-<div class="absolute inset-0 z-0 pointer-events-none">
-<img id="bg-image" class="w-full h-full object-cover animate-zoom">
-<div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
+<!-- Fondo -->
+<div class="absolute inset-0 z-0">
+<img id="bg-image" class="w-full h-full object-cover">
+<div class="absolute inset-0 bg-black/70"></div>
 </div>
 
+<!-- Progress -->
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
+<!-- Contenido -->
 <div class="flex-1 relative z-10 px-8 py-16 flex">
 <div id="content-wrapper"
 class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full">
 
-<!-- BLOQUE SUPERIOR -->
 <div id="top-block" class="flex flex-col items-center gap-8">
 
 <span id="badge"
-class="h-8 px-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white whitespace-nowrap">
+class="h-8 px-6 flex items-center justify-center rounded-full bg-purple-600 text-[10px] font-black tracking-[0.3em] uppercase text-white">
 </span>
 
-<div id="icon-container"
-class="flex items-center justify-center text-white"></div>
+<div id="icon-container" class="text-white"></div>
 
 <h1 id="title"
-class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white">
-</h1>
+class="font-black text-4xl text-white"></h1>
 
 <p id="description"
-class="text-white/80 leading-relaxed text-sm sm:text-base whitespace-pre-line">
-</p>
+class="text-white/80 whitespace-pre-line"></p>
 
 </div>
 
-<!-- BLOQUE INFERIOR -->
 <div id="bottom-block"
 class="flex flex-col items-center gap-4 w-full min-h-[160px] justify-end">
 
 <p id="highlight-text"
-class="text-white font-bold text-base sm:text-lg hidden">
+class="text-white font-bold hidden">
 Empieza a ver resultados reales con FINANCE PRO
 </p>
 
 <a id="cta-button"
-href="https://my-finance-pro.web.app/"
-class="premium-button hidden bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 transition-all text-lg border border-white/20">
+href="#"
+class="premium-button hidden bg-purple-600 text-white font-black py-4 px-10 rounded-full">
 Conocer Finance PRO
-<i data-lucide="arrow-right" class="w-6 h-6"></i>
 </a>
-
-<div id="cta-subtext"
-class="text-white/60 text-xs hidden">
-Empieza hoy. Sin riesgos. Sin complicaciones.
-</div>
 
 </div>
 </div>
@@ -119,17 +101,28 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 
 <script>
 
-/* ⚠️ IMPORTANTE:
-   MANTÉN AQUÍ TU ARRAY ORIGINAL COMPLETO
-   NO LO BORRES NI LO VACÍES
-*/
+/* ARRAY FUNCIONAL */
 const slides = [
-    // 👉 PEGA AQUÍ TU ARRAY ORIGINAL EXACTO
+{
+image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d",
+badge:"EL CICLO",
+icon:"refresh-ccw",
+title:"Vives el mismo ciclo",
+text:"Trabajas\nTe esfuerzas\nLuchas\nCumples",
+},
+{
+image:"https://images.unsplash.com/photo-1526304640581-d334cdbbf45e",
+badge:"TU MOMENTO",
+icon:"target",
+title:"Con Finance PRO todo esto es posible",
+text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.",
+type:"cta"
+}
 ];
 
 let currentSlide=0;
 let progress=0;
-const duration=9000;
+const duration=6000;
 const step=(40/duration)*100;
 
 function initBars(){
@@ -159,25 +152,23 @@ else{ bar.style.width="0%"; }
 
 function updateSlide(){
 
-if(!slides[currentSlide]) return; // 🔥 evita pantalla negra
-
 progress=0;
 const slide=slides[currentSlide];
 
-document.getElementById("bg-image").src=slide.image || "";
-document.getElementById("badge").innerText=slide.badge || "";
-document.getElementById("title").innerText=slide.title || "";
-document.getElementById("description").innerText=slide.text || "";
+document.getElementById("bg-image").src=slide.image;
+document.getElementById("badge").innerText=slide.badge;
+document.getElementById("title").innerText=slide.title;
+document.getElementById("description").innerText=slide.text;
 
 document.getElementById("icon-container").innerHTML=
-`<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
+`<i data-lucide="${slide.icon}" class="w-20 h-20 animate-pulse"></i>`;
 lucide.createIcons();
 
 const wrapper=document.getElementById("content-wrapper");
 const topBlock=document.getElementById("top-block");
 const bottomBlock=document.getElementById("bottom-block");
 
-// RESTABLECER ESTADO NORMAL
+// Reset
 wrapper.classList.remove("justify-center");
 wrapper.classList.add("justify-between");
 
@@ -186,9 +177,8 @@ bottomBlock.classList.remove("flex-1","justify-start");
 
 document.getElementById("highlight-text").classList.add("hidden");
 document.getElementById("cta-button").classList.add("hidden");
-document.getElementById("cta-subtext").classList.add("hidden");
 
-// SOLO ÚLTIMA PANTALLA
+// Solo última pantalla
 if(slide.type==="cta"){
 
 wrapper.classList.remove("justify-between");
@@ -199,32 +189,10 @@ bottomBlock.classList.add("flex-1","justify-start");
 
 document.getElementById("highlight-text").classList.remove("hidden");
 document.getElementById("cta-button").classList.remove("hidden");
-document.getElementById("cta-subtext").classList.remove("hidden");
 }
 
 updateProgressUI();
 }
-
-function nextSlide(){
-if(currentSlide<slides.length-1){
-currentSlide++;
-updateSlide();
-}
-}
-
-function prevSlide(){
-if(currentSlide>0){
-currentSlide--;
-updateSlide();
-}
-}
-
-document.addEventListener("click", function(e){
-if(e.target.closest("a")) return;
-const width = window.innerWidth;
-if(e.clientX < width/2){ prevSlide(); }
-else{ nextSlide(); }
-});
 
 setInterval(()=>{
 if(currentSlide >= slides.length-1 && progress>=100) return;
