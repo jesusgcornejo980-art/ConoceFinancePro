@@ -103,7 +103,7 @@ class="flex flex-col items-center justify-center w-full gap-4">
 const slides=[
 {
 title:"¿Sientes el Peso?",
-text:"•Trabajas      •Te esfuerzas\n•Luchas        •Cumples\n\nY aun así sientes que el dinero no alcanza.\nEsa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real.",
+text:"•Trabajas             •Te esfuerzas\n•Luchas                •Cumples\n\nY aun así sientes que el dinero no alcanza.\nEsa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real.",
 icon:"clock",
 badge:"EL PESO DIARIO",
 image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
@@ -165,8 +165,27 @@ container.appendChild(base);
 });
 }
 
+function updateProgressUI(){
+slides.forEach((_,i)=>{
+const bar=document.getElementById("bar-"+i);
+if(!bar) return;
+
+if(i < currentSlide){
+bar.style.width="100%";
+}
+else if(i === currentSlide){
+bar.style.width=progress+"%";
+}
+else{
+bar.style.width="0%";
+}
+});
+}
+
 function updateSlide(){
+progress=0;
 const slide=slides[currentSlide];
+
 document.getElementById("bg-image").src=slide.image;
 document.getElementById("badge").innerText=slide.badge;
 document.getElementById("title").innerText=slide.title;
@@ -197,12 +216,13 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 `;
 lucide.createIcons();
 }
+
+updateProgressUI();
 }
 
 function nextSlide(){
 if(currentSlide<slides.length-1){
 currentSlide++;
-progress=0;
 updateSlide();
 }
 }
@@ -210,7 +230,6 @@ updateSlide();
 function prevSlide(){
 if(currentSlide>0){
 currentSlide--;
-progress=0;
 updateSlide();
 }
 }
@@ -223,13 +242,18 @@ else{ nextSlide(); }
 });
 
 setInterval(()=>{
+if(currentSlide >= slides.length-1 && progress>=100) return;
+
 progress+=step;
 if(progress>=100){
-if(currentSlide<slides.length-1){nextSlide();}
-else{progress=100;}
+progress=100;
+if(currentSlide<slides.length-1){
+currentSlide++;
+progress=0;
+updateSlide();
 }
-const active=document.getElementById("bar-"+currentSlide);
-if(active)active.style.width=progress+"%";
+}
+updateProgressUI();
 },40);
 
 initBars();
