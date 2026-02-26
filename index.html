@@ -59,17 +59,21 @@ body{
 <div id="main-container"
 class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col">
 
+<!-- Fondo -->
 <div class="absolute inset-0 z-0 pointer-events-none">
 <img id="bg-image" class="w-full h-full object-cover animate-zoom">
 <div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
 </div>
 
+<!-- Indicadores -->
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
+<!-- Contenido -->
 <div class="flex-1 relative z-10 px-8 py-16 flex">
 <div class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full">
 
+<!-- Bloque superior -->
 <div class="flex flex-col items-center gap-8">
 
 <span id="badge"
@@ -89,9 +93,8 @@ class="text-white/80 leading-relaxed text-sm sm:text-base whitespace-pre-line">
 
 </div>
 
-<!-- BLOQUE INFERIOR RESTAURADO CORRECTAMENTE -->
-<div id="cta-container"
-class="flex flex-col items-center gap-4 w-full min-h-[140px] justify-end">
+<!-- Bloque inferior -->
+<div class="flex flex-col items-center gap-4 w-full min-h-[140px] justify-end">
 
 <p id="highlight-text"
 class="text-white font-bold text-base sm:text-lg hidden">
@@ -118,7 +121,51 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 
 <script>
 
-const slides=[ ... ]; // (SIN CAMBIOS en contenido de slides)
+const slides=[
+{
+title:"¿Sientes el Peso?",
+text:"•Trabajas             •Te esfuerzas\n•Luchas                •Cumples\n\nY aun así sientes que el dinero no alcanza.\nEsa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real.",
+icon:"clock",
+badge:"EL PESO DIARIO",
+image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"La Trampa del Ciclo",
+text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento. Sin avance real.",
+icon:"lock",
+badge:"EL CICLO",
+image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Tu Nuevo Mantra",
+text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre. Cada decisión se vuelve estratégica.",
+icon:"brain-circuit",
+badge:"HÁBITOS PRO",
+image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Adiós al Estrés",
+text:"Imagina revisar tu celular y sentir tranquilidad. Saber que puedes gastar sin culpa.",
+icon:"coins",
+badge:"SOLUCIÓN",
+image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Paz en Tiempo Real",
+text:"Cuando ves tu avance crecer, algo cambia en tu mente. La confianza reemplaza el miedo.",
+icon:"layout-dashboard",
+badge:"CLARIDAD",
+image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Con Finance PRO todo esto es posible",
+text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.",
+icon:"rocket",
+badge:"TU MOMENTO",
+type:"cta",
+image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
+}
+];
 
 let currentSlide=0;
 let progress=0;
@@ -163,19 +210,9 @@ document.getElementById("icon-container").innerHTML=
 `<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
 lucide.createIcons();
 
-const highlight=document.getElementById("highlight-text");
-const button=document.getElementById("cta-button");
-const subtext=document.getElementById("cta-subtext");
-
-highlight.classList.add("hidden");
-button.classList.add("hidden");
-subtext.classList.add("hidden");
-
-if(slide.type==="cta"){
-highlight.classList.remove("hidden");
-button.classList.remove("hidden");
-subtext.classList.remove("hidden");
-}
+document.getElementById("highlight-text").classList.toggle("hidden", slide.type!=="cta");
+document.getElementById("cta-button").classList.toggle("hidden", slide.type!=="cta");
+document.getElementById("cta-subtext").classList.toggle("hidden", slide.type!=="cta");
 
 updateProgressUI();
 }
