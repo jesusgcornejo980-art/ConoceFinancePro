@@ -59,42 +59,53 @@ body{
 <div id="main-container"
 class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col">
 
+<!-- Fondo -->
 <div class="absolute inset-0 z-0 pointer-events-none">
 <img id="bg-image" class="w-full h-full object-cover animate-zoom">
 <div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
 </div>
 
+<!-- Indicadores -->
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<!-- CONTENEDOR CON DISTRIBUCIÓN UNIFORME REAL -->
-<div class="flex-1 flex flex-col justify-center items-center text-center px-8 relative z-10 gap-8">
+<!-- Layout Uniforme Exacto -->
+<div class="flex-1 flex flex-col justify-center items-center text-center px-8 relative z-10">
 
+<div class="w-full max-w-md flex flex-col items-center gap-8">
+
+<!-- Badge -->
 <span id="badge"
 class="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white text-center">
 </span>
 
+<!-- Ícono -->
 <div id="icon-container"
 class="flex items-center justify-center text-white">
 </div>
 
+<!-- Título -->
 <h1 id="title"
-class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white text-center max-w-md">
+class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white text-center">
 </h1>
 
+<!-- Texto -->
 <p id="description"
-class="text-white/80 leading-relaxed text-sm sm:text-base text-center max-w-md whitespace-pre-line">
+class="text-white/80 leading-relaxed text-sm sm:text-base text-center whitespace-pre-line">
 </p>
 
+<!-- Texto destacado -->
 <p id="highlight-text"
-class="text-white font-bold text-base sm:text-lg text-center max-w-md hidden">
+class="text-white font-bold text-base sm:text-lg text-center hidden">
 Empieza a ver resultados reales con FINANCE PRO
 </p>
 
+<!-- Botón -->
 <div id="cta-container"
 class="flex flex-col items-center justify-center w-full gap-4">
 </div>
 
+</div>
 </div>
 
 </div>
@@ -104,11 +115,10 @@ class="flex flex-col items-center justify-center w-full gap-4">
 const slides=[
 {
 title:"¿Sientes el Peso?",
-text:"",
+text:"•Trabajas             •Te esfuerzas\n•Luchas                •Cumples\n\nY aun así sientes que el dinero no alcanza.\nEsa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real.",
 icon:"clock",
 badge:"EL PESO DIARIO",
-image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
-custom:true
+image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
 },
 {
 title:"La Trampa del Ciclo",
@@ -185,33 +195,7 @@ const slide=slides[currentSlide];
 document.getElementById("bg-image").src=slide.image;
 document.getElementById("badge").innerText=slide.badge;
 document.getElementById("title").innerText=slide.title;
-
-const description=document.getElementById("description");
-description.innerHTML="";
-
-if(slide.custom){
-description.innerHTML=`
-<div class="w-full flex flex-col gap-6">
-  <div class="grid grid-cols-3 w-full text-center">
-    <div>•Trabajas</div>
-    <div></div>
-    <div>•Te esfuerzas</div>
-  </div>
-  <div class="grid grid-cols-3 w-full text-center">
-    <div>•Luchas</div>
-    <div></div>
-    <div>•Cumples</div>
-  </div>
-  <div class="mt-4">
-  Y aun así sientes que el dinero no alcanza.<br><br>
-  Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.<br>
-  Es el resultado de no tener control real.
-  </div>
-</div>
-`;
-}else{
-description.innerText=slide.text;
-}
+document.getElementById("description").innerText=slide.text;
 
 document.getElementById("icon-container").innerHTML=
 `<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
