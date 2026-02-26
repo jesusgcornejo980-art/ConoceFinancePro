@@ -64,36 +64,42 @@ class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden 
 <div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
 </div>
 
+<!-- Indicador -->
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<!-- CONTENIDO PRINCIPAL -->
-<div class="flex-1 flex flex-col justify-center items-center text-center px-8 pt-24 pb-10 relative z-10 space-y-10">
+<!-- CONTENIDO -->
+<div class="flex-1 flex flex-col justify-center items-center text-center px-8 relative z-10">
 
-<!-- Badge + Icon -->
-<div class="flex flex-col items-center space-y-6">
+<div class="flex flex-col items-center justify-center w-full max-w-md gap-8">
+
+<!-- Badge -->
 <span id="badge"
-class="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-[10px] font-black tracking-[0.3em] uppercase text-white backdrop-blur-md"></span>
+class="px-5 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white"></span>
 
+<!-- Ícono -->
 <div id="icon-container"
 class="flex items-center justify-center text-white"></div>
-</div>
 
-<!-- Textos -->
-<div class="flex flex-col items-center text-center space-y-6 max-w-md">
+<!-- Título -->
 <h1 id="title"
 class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white"></h1>
 
-<h2 id="subtitle"
-class="font-bold text-white text-base sm:text-lg md:text-xl"></h2>
-
+<!-- Texto -->
 <p id="description"
-class="text-white/80 leading-relaxed text-sm sm:text-base max-w-sm whitespace-pre-line"></p>
-</div>
+class="text-white/80 leading-relaxed text-sm sm:text-base whitespace-pre-line"></p>
+
+<!-- Texto destacado final -->
+<p id="highlight-text"
+class="text-white font-bold text-base sm:text-lg hidden">
+Empieza a ver resultados reales con FINANCE PRO
+</p>
 
 <!-- CTA -->
 <div id="cta-container"
-class="flex flex-col items-center justify-center w-full space-y-4"></div>
+class="flex flex-col items-center justify-center w-full gap-4"></div>
+
+</div>
 
 </div>
 
@@ -104,7 +110,6 @@ class="flex flex-col items-center justify-center w-full space-y-4"></div>
 const slides=[
 {
 title:"¿Sientes el Peso?",
-subtitle:"Cuando el dinero no alcanza.",
 text:"Trabajas. Te esfuerzas. Cumples. Y aun así sientes que el dinero se evapora. Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad. Es el resultado de no tener control real.",
 icon:"clock",
 badge:"EL PESO DIARIO",
@@ -112,7 +117,6 @@ image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&
 },
 {
 title:"La Trampa del Ciclo",
-subtitle:"Trabajar solo para pagar.",
 text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento. Sin avance real.",
 icon:"lock",
 badge:"EL CICLO",
@@ -120,7 +124,6 @@ image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit
 },
 {
 title:"Tu Nuevo Mantra",
-subtitle:"Regla 50-30-20.",
 text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre. Cada decisión se vuelve estratégica.",
 icon:"brain-circuit",
 badge:"HÁBITOS PRO",
@@ -128,7 +131,6 @@ image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&
 },
 {
 title:"Adiós al Estrés",
-subtitle:"Sistema inteligente.",
 text:"Imagina revisar tu celular y sentir tranquilidad. Saber que puedes gastar sin culpa.",
 icon:"coins",
 badge:"SOLUCIÓN",
@@ -136,7 +138,6 @@ image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&
 },
 {
 title:"Paz en Tiempo Real",
-subtitle:"Visualiza tu progreso.",
 text:"Cuando ves tu avance crecer, algo cambia en tu mente. La confianza reemplaza el miedo.",
 icon:"layout-dashboard",
 badge:"CLARIDAD",
@@ -144,8 +145,7 @@ image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit
 },
 {
 title:"Con Finance PRO todo esto es posible",
-subtitle:"",
-text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.\n<strong>Empieza a ver resultados reales con FINANCE PRO</strong>",
+text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.",
 icon:"rocket",
 badge:"TU MOMENTO",
 type:"cta",
@@ -177,7 +177,6 @@ const slide=slides[currentSlide];
 document.getElementById("bg-image").src=slide.image;
 document.getElementById("badge").innerText=slide.badge;
 document.getElementById("title").innerText=slide.title;
-document.getElementById("subtitle").innerText=slide.subtitle;
 document.getElementById("description").innerText=slide.text;
 
 document.getElementById("icon-container").innerHTML=
@@ -185,9 +184,14 @@ document.getElementById("icon-container").innerHTML=
 lucide.createIcons();
 
 const cta=document.getElementById("cta-container");
+const highlight=document.getElementById("highlight-text");
+
 cta.innerHTML="";
+highlight.classList.add("hidden");
 
 if(slide.type==="cta"){
+highlight.classList.remove("hidden");
+
 cta.innerHTML=`
 <a href="https://my-finance-pro.web.app/"
 class="premium-button bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 transition-all text-lg border border-white/20">
