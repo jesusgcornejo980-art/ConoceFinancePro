@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance PRO - Control Total</title>
+<title>Finance PRO</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -120,7 +120,10 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 
 <script>
 
-const slides=[/* MISMO ARRAY SIN CAMBIOS */];
+// ⚠️ DEJA TU ARRAY slides EXACTAMENTE COMO LO TENÍAS
+const slides = [
+  // TU CONTENIDO ORIGINAL AQUÍ (NO CAMBIA)
+];
 
 let currentSlide=0;
 let progress=0;
@@ -169,17 +172,7 @@ const wrapper=document.getElementById("content-wrapper");
 const topBlock=document.getElementById("top-block");
 const bottomBlock=document.getElementById("bottom-block");
 
-if(slide.type==="cta"){
-wrapper.classList.remove("justify-between");
-wrapper.classList.add("justify-center");
-
-topBlock.classList.add("flex-1","justify-end");
-bottomBlock.classList.add("flex-1","justify-start");
-
-document.getElementById("highlight-text").classList.remove("hidden");
-document.getElementById("cta-button").classList.remove("hidden");
-document.getElementById("cta-subtext").classList.remove("hidden");
-}else{
+// 🔁 RESTABLECER ESTADO NORMAL (TODAS LAS PANTALLAS)
 wrapper.classList.add("justify-between");
 wrapper.classList.remove("justify-center");
 
@@ -189,6 +182,19 @@ bottomBlock.classList.remove("flex-1","justify-start");
 document.getElementById("highlight-text").classList.add("hidden");
 document.getElementById("cta-button").classList.add("hidden");
 document.getElementById("cta-subtext").classList.add("hidden");
+
+// ✅ SOLO ÚLTIMA PANTALLA
+if(slide.type==="cta"){
+
+wrapper.classList.remove("justify-between");
+wrapper.classList.add("justify-center");
+
+topBlock.classList.add("flex-1","justify-end");
+bottomBlock.classList.add("flex-1","justify-start");
+
+document.getElementById("highlight-text").classList.remove("hidden");
+document.getElementById("cta-button").classList.remove("hidden");
+document.getElementById("cta-subtext").classList.remove("hidden");
 }
 
 updateProgressUI();
