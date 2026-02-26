@@ -3,270 +3,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance Pro</title>
+<title>Finance PRO - Control Total</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-*{
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#000;
     margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
 }
 
-body,html{
-    height:100%;
-    overflow:hidden;
-    background:black;
-}
-
-.screen{
+/* MÓVIL: ocupa toda la pantalla */
+#main-container{
+    width:100%;
     height:100vh;
-    width:100%;
-    position:absolute;
-    top:0;
-    left:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:40px 25px;
-    background-size:cover;
-    background-position:center;
-    transition:transform .6s ease;
 }
 
-.overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.65);
+/* DESKTOP: efecto app vertical */
+@media(min-width:768px){
+    #main-container{
+        aspect-ratio:9/19;
+        height:auto;
+        max-height:95vh;
+    }
 }
 
-.content{
-    position:relative;
-    z-index:2;
-    width:100%;
-    max-width:420px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:28px;
+@keyframes subtle-zoom{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+.animate-zoom{
+    animation:subtle-zoom 12s linear infinite;
 }
 
-/* Indicadores superiores */
-.top-bars{
-    display:flex;
-    gap:8px;
-    margin-bottom:10px;
+.progress-bar{
+    transition:width 40ms linear;
 }
 
-.bar{
-    width:30px;
-    height:4px;
-    background:#ffffff50;
-    border-radius:4px;
+@keyframes premiumPulse{
+    0%{box-shadow:0 0 25px rgba(139,92,246,.4);}
+    50%{box-shadow:0 0 60px rgba(139,92,246,1);}
+    100%{box-shadow:0 0 25px rgba(139,92,246,.4);}
 }
 
-/* Badge */
-.badge{
-    background:linear-gradient(90deg,#7b2ff7,#4b00ff);
-    padding:8px 18px;
-    border-radius:20px;
-    font-size:12px;
-    letter-spacing:2px;
-    color:white;
-}
-
-/* Iconos estilo anterior con animación */
-.icon{
-    font-size:60px;
-    color:white;
-    opacity:.9;
-    animation:float 3s ease-in-out infinite;
-}
-
-@keyframes float{
-    0%,100%{ transform:translateY(0px); }
-    50%{ transform:translateY(-8px); }
-}
-
-h1{
-    font-size:28px;
-    font-weight:800;
-    color:white;
-}
-
-.subtitle{
-    font-size:18px;
-    font-weight:600;
-    color:white;
-}
-
-.text{
-    font-size:16px;
-    color:#ddd;
-    line-height:1.6;
-}
-
-.highlight{
-    font-weight:800;
-    color:white;
-}
-
-button{
-    margin-top:10px;
-    padding:18px 30px;
-    border:none;
-    border-radius:40px;
-    font-size:18px;
-    font-weight:600;
-    color:white;
-    cursor:pointer;
-    width:100%;
-    background:linear-gradient(90deg,#7b2ff7,#4b00ff);
-    box-shadow:0 0 25px rgba(123,47,247,.6);
-    transition:.3s;
-}
-
-button:hover{
-    transform:scale(1.05);
+.premium-button{
+    animation:premiumPulse 2.5s ease-in-out infinite;
 }
 </style>
 </head>
 
-<body>
+<body class="flex items-center justify-center min-h-screen p-4">
 
-<!-- 1 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1565514020179-026b92b84bb6');">
-<div class="overlay"></div>
-<div class="content">
-<div class="top-bars">
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-</div>
-<div class="badge">EL CICLO</div>
-<div class="icon">🔒</div>
-<h1>La Trampa del Ciclo</h1>
-<div class="subtitle">Trabajar solo para pagar.</div>
-<div class="text">
-Ingresas dinero… pagas cuentas… vuelves a empezar.
-Sin ahorro sólido. Sin crecimiento. Sin avance real.
-</div>
-</div>
-</section>
+<div id="main-container"
+class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col">
 
-<!-- 2 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f'); transform:translateX(100%);">
-<div class="overlay"></div>
-<div class="content">
-<div class="top-bars">
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-</div>
-<div class="badge">EL PROBLEMA</div>
-<div class="icon">📉</div>
-<h1>No es falta de dinero</h1>
-<div class="text">
-Es falta de estrategia.
-Sin claridad financiera, cada mes empieza en cero.
-</div>
-</div>
-</section>
-
-<!-- 3 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a'); transform:translateX(200%);">
-<div class="overlay"></div>
-<div class="content">
-<div class="top-bars">
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-</div>
-<div class="badge">CONCIENCIA</div>
-<div class="icon">🧠</div>
-<h1>Lo que no mides</h1>
-<div class="text">
-No mejora.
-Tus decisiones diarias construyen o destruyen tu libertad.
-</div>
-</div>
-</section>
-
-<!-- 4 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1507679799987-c73779587ccf'); transform:translateX(300%);">
-<div class="overlay"></div>
-<div class="content">
-<div class="top-bars">
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-</div>
-<div class="badge">EL CAMBIO</div>
-<div class="icon">📊</div>
-<h1>Un sistema simple</h1>
-<div class="text">
-Que te dice cuánto gastar, cuánto ahorrar
-y cómo avanzar sin estrés.
-</div>
-</div>
-</section>
-
-<!-- 5 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c'); transform:translateX(400%);">
-<div class="overlay"></div>
-<div class="content">
-<div class="top-bars">
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-</div>
-<div class="badge">TU NUEVO MANTRA</div>
-<div class="icon">🔥</div>
-<h1>Disciplina supera motivación</h1>
-<div class="text">
-No necesitas más ganas.
-Necesitas un método.
-</div>
-</div>
-</section>
-
-<!-- 6 -->
-<section class="screen" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f'); transform:translateX(500%);">
-<div class="overlay"></div>
-<div class="content">
-<div class="top-bars">
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-<div class="bar"></div><div class="bar"></div><div class="bar"></div>
-</div>
-<div class="badge">TU MOMENTO</div>
-<div class="icon">🚀</div>
-<h1>Con Finance PRO todo esto es posible</h1>
-
-<div class="text">
-Intención sin acción no tiene valor.<br>
-La intención no crea libertad financiera, el movimiento que haces hoy, sí.
+<div class="absolute inset-0 z-0 pointer-events-none">
+<img id="bg-image" class="w-full h-full object-cover animate-zoom">
+<div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
 </div>
 
-<div class="highlight">
-Empieza a ver resultados reales con FINANCE PRO
+<div id="progress-container"
+class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
+
+<div class="flex-1 flex flex-col justify-center items-center text-center px-8 pt-20 pb-4 relative z-10 gap-8">
+
+<div class="flex flex-col items-center gap-4">
+
+<span id="badge"
+class="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-[10px] font-black tracking-[0.3em] uppercase text-white backdrop-blur-md"></span>
+
+<div id="icon-container"
+class="flex items-center justify-center text-white"></div>
+
 </div>
 
-<button onclick="window.location.href='https://my-finance-pro.web.app/'">
-Conocer Finance PRO
-</button>
+<div class="flex flex-col gap-5 max-w-md items-center text-center">
+
+<h1 id="title"
+class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white"></h1>
+
+<h2 id="subtitle"
+class="font-bold text-white text-base sm:text-lg md:text-xl"></h2>
+
+<p id="description"
+class="text-white/80 leading-relaxed text-sm sm:text-base max-w-sm whitespace-pre-line"></p>
 
 </div>
-</section>
+
+<div id="cta-container"
+class="flex flex-col items-center justify-center w-full mt-2 gap-3"></div>
+
+</div>
+
+</div>
 
 <script>
-let current=0;
-const screens=document.querySelectorAll('.screen');
 
-document.addEventListener('click',()=>{
-if(current<screens.length-1){
-screens[current].style.transform="translateX(-100%)";
-current++;
-screens[current].style.transform="translateX(0)";
+const slides=[
+{
+title:"¿Sientes el Peso?",
+subtitle:"Cuando el dinero no alcanza.",
+text:"Trabajas. Te esfuerzas. Cumples. Y aun así sientes que el dinero se evapora. Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad. Es el resultado de no tener control real.",
+icon:"clock",
+badge:"EL PESO DIARIO",
+image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"La Trampa del Ciclo",
+subtitle:"Trabajar solo para pagar.",
+text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento. Sin avance real.",
+icon:"lock",
+badge:"EL CICLO",
+image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Tu Nuevo Mantra",
+subtitle:"Regla 50-30-20.",
+text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre. Cada decisión se vuelve estratégica.",
+icon:"brain-circuit",
+badge:"HÁBITOS PRO",
+image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Adiós al Estrés",
+subtitle:"Sistema inteligente.",
+text:"Imagina revisar tu celular y sentir tranquilidad. Saber que puedes gastar sin culpa.",
+icon:"coins",
+badge:"SOLUCIÓN",
+image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Paz en Tiempo Real",
+subtitle:"Visualiza tu progreso.",
+text:"Cuando ves tu avance crecer, algo cambia en tu mente. La confianza reemplaza el miedo.",
+icon:"layout-dashboard",
+badge:"CLARIDAD",
+image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+},
+{
+title:"Con Finance PRO todo esto es posible",
+subtitle:"",
+text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.\n<strong>Empieza a ver resultados reales con FINANCE PRO</strong>",
+icon:"rocket",
+badge:"TU MOMENTO",
+type:"cta",
+image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
 }
+];
+
+let currentSlide=0;
+let progress=0;
+const duration=9000;
+const step=(40/duration)*100;
+
+function initBars(){
+const container=document.getElementById("progress-container");
+container.innerHTML="";
+slides.forEach((_,i)=>{
+const base=document.createElement("div");
+base.className="h-[3px] flex-1 bg-white/20 rounded-full overflow-hidden";
+const fill=document.createElement("div");
+fill.id="bar-"+i;
+fill.className="h-full bg-white progress-bar w-0";
+base.appendChild(fill);
+container.appendChild(base);
 });
+}
+
+function updateSlide(){
+const slide=slides[currentSlide];
+document.getElementById("bg-image").src=slide.image;
+document.getElementById("badge").innerText=slide.badge;
+document.getElementById("title").innerText=slide.title;
+document.getElementById("subtitle").innerText=slide.subtitle;
+document.getElementById("description").innerText=slide.text;
+
+document.getElementById("icon-container").innerHTML=
+`<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
+lucide.createIcons();
+
+const cta=document.getElementById("cta-container");
+cta.innerHTML="";
+
+if(slide.type==="cta"){
+cta.innerHTML=`
+<a href="https://my-finance-pro.web.app/"
+class="premium-button bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 transition-all text-lg border border-white/20">
+Conocer Finance PRO
+<i data-lucide="arrow-right" class="w-6 h-6"></i>
+</a>
+<div class="text-white/60 text-xs">
+Empieza hoy. Sin riesgos. Sin complicaciones.
+</div>
+`;
+lucide.createIcons();
+}
+}
+
+function nextSlide(){
+if(currentSlide<slides.length-1){
+currentSlide++;
+progress=0;
+updateSlide();
+}
+}
+
+function prevSlide(){
+if(currentSlide>0){
+currentSlide--;
+progress=0;
+updateSlide();
+}
+}
+
+document.addEventListener("click", function(e){
+if(e.target.closest("a")) return;
+const width = window.innerWidth;
+if(e.clientX < width/2){ prevSlide(); }
+else{ nextSlide(); }
+});
+
+setInterval(()=>{
+progress+=step;
+if(progress>=100){
+if(currentSlide<slides.length-1){nextSlide();}
+else{progress=100;}
+}
+const active=document.getElementById("bar-"+currentSlide);
+if(active)active.style.width=progress+"%";
+},40);
+
+initBars();
+updateSlide();
+
 </script>
 
 </body>
