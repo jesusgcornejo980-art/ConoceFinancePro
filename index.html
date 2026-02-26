@@ -94,6 +94,11 @@ class="premium-button hidden bg-purple-600 text-white font-black py-4 px-10 roun
 Conocer Finance PRO
 </a>
 
+<div id="cta-subtext"
+class="text-white/60 text-xs hidden">
+Empieza hoy. Sin riesgos. Sin complicaciones.
+</div>
+
 </div>
 </div>
 </div>
@@ -101,28 +106,67 @@ Conocer Finance PRO
 
 <script>
 
-/* ARRAY FUNCIONAL */
+/* ===== 6 PANTALLAS ===== */
+
 const slides = [
+
 {
 image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d",
 badge:"EL CICLO",
 icon:"refresh-ccw",
 title:"Vives el mismo ciclo",
-text:"Trabajas\nTe esfuerzas\nLuchas\nCumples",
+text:"Trabajas      Te esfuerzas\nLuchas          Cumples"
 },
+
 {
 image:"https://images.unsplash.com/photo-1526304640581-d334cdbbf45e",
+badge:"REALIDAD",
+icon:"alert-triangle",
+title:"Y aun así sientes que el dinero no alcanza.",
+text:"Esa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real."
+},
+
+{
+image:"https://images.unsplash.com/photo-1508385082359-f38ae991e8f2",
+badge:"PROBLEMA",
+icon:"lock",
+title:"No es falta de dinero",
+text:"Es falta de estructura.\nSin sistema, siempre vuelves al mismo punto."
+},
+
+{
+image:"https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+badge:"SOLUCIÓN",
+icon:"pie-chart",
+title:"Nuestro sistema 50-30-20",
+text:"50% necesidades\n30% estilo de vida\n20% inversión y crecimiento"
+},
+
+{
+image:"https://images.unsplash.com/photo-1485217988980-11786ced9454",
+badge:"DECISIÓN",
+icon:"trending-up",
+title:"Con Finance PRO todo esto es posible",
+text:"Organización.\nControl.\nCrecimiento."
+},
+
+{
+image:"https://images.unsplash.com/photo-1507679799987-c73779587ccf",
 badge:"TU MOMENTO",
 icon:"target",
-title:"Con Finance PRO todo esto es posible",
-text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.",
+title:"Intención sin acción no tiene valor.",
+text:"La intención no crea libertad financiera, el movimiento que haces hoy, sí.",
 type:"cta"
 }
+
 ];
+
+
+/* ===== SISTEMA ===== */
 
 let currentSlide=0;
 let progress=0;
-const duration=6000;
+const duration=7000;
 const step=(40/duration)*100;
 
 function initBars(){
@@ -168,7 +212,7 @@ const wrapper=document.getElementById("content-wrapper");
 const topBlock=document.getElementById("top-block");
 const bottomBlock=document.getElementById("bottom-block");
 
-// Reset
+/* RESET NORMAL */
 wrapper.classList.remove("justify-center");
 wrapper.classList.add("justify-between");
 
@@ -177,8 +221,9 @@ bottomBlock.classList.remove("flex-1","justify-start");
 
 document.getElementById("highlight-text").classList.add("hidden");
 document.getElementById("cta-button").classList.add("hidden");
+document.getElementById("cta-subtext").classList.add("hidden");
 
-// Solo última pantalla
+/* SOLO ÚLTIMA PANTALLA */
 if(slide.type==="cta"){
 
 wrapper.classList.remove("justify-between");
@@ -189,11 +234,13 @@ bottomBlock.classList.add("flex-1","justify-start");
 
 document.getElementById("highlight-text").classList.remove("hidden");
 document.getElementById("cta-button").classList.remove("hidden");
+document.getElementById("cta-subtext").classList.remove("hidden");
 }
 
 updateProgressUI();
 }
 
+/* AUTO AVANCE */
 setInterval(()=>{
 if(currentSlide >= slides.length-1 && progress>=100) return;
 
