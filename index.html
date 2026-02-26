@@ -17,13 +17,13 @@ body{
     margin:0;
 }
 
-/* MÓVIL: ocupa toda la pantalla */
+/* MÓVIL */
 #main-container{
     width:100%;
     height:100vh;
 }
 
-/* DESKTOP: efecto app vertical */
+/* DESKTOP */
 @media(min-width:768px){
     #main-container{
         aspect-ratio:9/19;
@@ -69,9 +69,11 @@ class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden 
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<div class="flex-1 flex flex-col justify-center items-center text-center px-8 pt-20 pb-4 relative z-10 gap-8">
+<!-- CONTENEDOR PRINCIPAL -->
+<div class="flex-1 flex flex-col justify-center items-center text-center px-8 pt-20 pb-4 relative z-10 gap-10">
 
-<div class="flex flex-col items-center gap-8">
+<!-- BADGE + ICONO -->
+<div class="flex flex-col items-center gap-10">
 
 <span id="badge"
 class="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-[10px] font-black tracking-[0.3em] uppercase text-white backdrop-blur-md"></span>
@@ -81,7 +83,8 @@ class="flex items-center justify-center text-white"></div>
 
 </div>
 
-<div class="flex flex-col gap-8 max-w-md items-center text-center">
+<!-- TEXTOS -->
+<div class="flex flex-col gap-10 max-w-md items-center text-center">
 
 <h1 id="title"
 class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white"></h1>
@@ -94,11 +97,11 @@ class="text-white/80 leading-relaxed text-sm sm:text-base max-w-sm whitespace-pr
 
 </div>
 
+<!-- CTA -->
 <div id="cta-container"
-class="flex flex-col items-center justify-center w-full gap-8"></div>
+class="flex flex-col items-center justify-center w-full gap-10"></div>
 
 </div>
-
 </div>
 
 <script>
