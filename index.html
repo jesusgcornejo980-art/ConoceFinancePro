@@ -67,9 +67,9 @@ class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden 
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<div class="flex-1 relative z-10 px-8 py-16 flex overflow-hidden">
+<div class="flex-1 relative z-10 px-6 py-10 sm:px-8 sm:py-16 flex overflow-y-auto sm:overflow-hidden">
 
-<div class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full overflow-hidden">
+<div class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full">
 
 <div class="flex flex-col items-center gap-8 w-full">
 
@@ -81,21 +81,20 @@ class="h-8 px-6 flex items-center justify-center rounded-full bg-gradient-to-r f
 class="flex items-center justify-center text-white"></div>
 
 <h1 id="title"
-class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white">
+class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl text-white whitespace-pre-line">
 </h1>
 
 <p id="description"
 class="text-white/80 leading-relaxed text-sm sm:text-base whitespace-pre-line">
 </p>
 
-<!-- NUEVAS TARJETAS -->
 <div id="features-container"
 class="w-full grid grid-cols-2 gap-4 mt-6">
 </div>
 
 </div>
 
-<div class="flex flex-col items-center gap-4 w-full min-h-[160px] justify-end">
+<div class="flex flex-col items-center gap-3 w-full min-h-[140px] justify-end">
 
 <p id="highlight-text"
 class="text-white font-bold text-base sm:text-lg hidden">
@@ -125,14 +124,14 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 const slides=[
 
 {
-title:"¿Sientes el Peso?",
-text:"•Trabajas             •Te esfuerzas\n•Luchas                •Cumples\n\nY aun así sientes que el dinero no alcanza.",
-icon:"clock",
-badge:"EL PESO DIARIO",
+title:"No es el dinero.\nEs la presión constante.",
+text:"No es solo lo que pagas.\nEs lo que cargas todos los días.\n\nEs la sensación silenciosa de no tener el control.\n\nEs pensar que trabajas duro…\npero no avanzar como quisieras.",
+icon:"brain",
+badge:"PRESIÓN INVISIBLE",
 image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
 features:[
-{icon:"alert-circle",text:"Estrés Financiero"},
-{icon:"trending-down",text:"Falta de Control"}
+{icon:"alert-circle",text:"Estrés Mental"},
+{icon:"trending-down",text:"Falta de Dirección"}
 ]
 },
 
@@ -265,26 +264,6 @@ document.getElementById("cta-subtext").classList.toggle("hidden", slide.type!=="
 
 updateProgressUI();
 }
-
-document.addEventListener("click", function(e){
-if(e.target.closest("a")) return;
-const width = window.innerWidth;
-if(e.clientX < width/2 && currentSlide>0){ currentSlide--; updateSlide(); }
-else if(e.clientX >= width/2 && currentSlide<slides.length-1){ currentSlide++; updateSlide(); }
-});
-
-setInterval(()=>{
-if(currentSlide >= slides.length-1 && progress>=100) return;
-progress+=step;
-if(progress>=100){
-progress=100;
-if(currentSlide<slides.length-1){
-currentSlide++;
-updateSlide();
-}
-}
-updateProgressUI();
-},40);
 
 initBars();
 updateSlide();
