@@ -39,62 +39,66 @@ body{
     animation:subtleZoom 14s linear infinite;
 }
 
-/* ===== ANIMACIONES NUEVAS ===== */
+/* Animaciones */
+.fade-up{opacity:0;transform:translateY(30px);}
+.fade-up.show{opacity:1;transform:translateY(0);transition:all .7s cubic-bezier(.16,1,.3,1);}
 
-.fade-up{
-    opacity:0;
-    transform:translateY(30px);
-}
-.fade-up.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:all .7s cubic-bezier(.16,1,.3,1);
-}
+.fade-down{opacity:0;transform:translateY(-20px);}
+.fade-down.show{opacity:1;transform:translateY(0);transition:all .6s ease;}
 
-.fade-down{
-    opacity:0;
-    transform:translateY(-20px);
-}
-.fade-down.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:all .6s ease;
-}
+.zoom-in{opacity:0;transform:scale(.85);}
+.zoom-in.show{opacity:1;transform:scale(1);transition:all .6s cubic-bezier(.16,1,.3,1);}
 
-.zoom-in{
-    opacity:0;
-    transform:scale(.85);
-}
-.zoom-in.show{
-    opacity:1;
-    transform:scale(1);
-    transition:all .6s cubic-bezier(.16,1,.3,1);
-}
-
-.feature-card{
-    opacity:0;
-    transform:translateY(25px);
-}
-.feature-card.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:all .6s cubic-bezier(.16,1,.3,1);
-}
+.feature-card{opacity:0;transform:translateY(25px);}
+.feature-card.show{opacity:1;transform:translateY(0);transition:all .6s cubic-bezier(.16,1,.3,1);}
 
 /* Progress */
-.progress-bar{
-    transition:width 40ms linear;
-}
+.progress-bar{transition:width 40ms linear;}
 
 /* CTA glow */
 @keyframes glow{
-    0%{box-shadow:0 0 20px rgba(139,92,246,.4);}
-    50%{box-shadow:0 0 45px rgba(139,92,246,1);}
-    100%{box-shadow:0 0 20px rgba(139,92,246,.4);}
+0%{box-shadow:0 0 20px rgba(139,92,246,.4);}
+50%{box-shadow:0 0 45px rgba(139,92,246,1);}
+100%{box-shadow:0 0 20px rgba(139,92,246,.4);}
 }
-.premium-button{
-    animation:glow 2.5s ease-in-out infinite;
+.premium-button{animation:glow 2.5s ease-in-out infinite;}
+
+/* Gradiente inferior */
+.bottom-gradient{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+height:35%;
+background:linear-gradient(
+to top,
+rgba(0,0,0,0.95) 0%,
+rgba(0,0,0,0.85) 35%,
+rgba(0,0,0,0.6) 60%,
+rgba(0,0,0,0.0) 100%
+);
+pointer-events:none;
 }
+
+/* Micro mensaje */
+.bottom-message{
+position:absolute;
+bottom:25px;
+width:100%;
+text-align:center;
+font-size:12px;
+letter-spacing:.5px;
+color:rgba(255,255,255,.65);
+opacity:0;
+transform:translateY(15px);
+}
+
+.bottom-message.show{
+opacity:1;
+transform:translateY(0);
+transition:all .8s ease;
+}
+
 </style>
 </head>
 
@@ -107,6 +111,7 @@ class="relative w-full max-w-[430px] bg-black overflow-hidden md:rounded-[40px]"
 <div class="absolute inset-0 z-0">
 <img id="bg-image" class="w-full h-full object-cover animate-zoom">
 <div class="absolute inset-0 bg-black/60"></div>
+<div class="bottom-gradient"></div>
 </div>
 
 <!-- Progress -->
@@ -114,7 +119,7 @@ class="relative w-full max-w-[430px] bg-black overflow-hidden md:rounded-[40px]"
 class="absolute top-3 left-3 right-3 flex gap-1 z-50"></div>
 
 <!-- Content -->
-<div class="relative z-10 h-full px-6 pt-16 pb-10 flex flex-col text-center">
+<div class="relative z-10 h-full px-6 pt-16 pb-20 flex flex-col text-center">
 
 <span id="badge"
 class="fade-down self-center px-6 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
@@ -152,83 +157,84 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 </div>
 
 </div>
+
+<!-- Mensaje dinámico -->
+<div id="bottomHint" class="bottom-message"></div>
+
 </div>
 
 <script>
 
-/* ===== RESTAURADAS TODAS LAS PANTALLAS ===== */
-
 const slides=[
-
 {
 title:"¿Sientes que no te alcanza el dinero?",
 text:"Trabajas duro.\nCumples con todo.\nPero al final del mes sientes que no avanzas.",
 icon:"help-circle",
 badge:"IDENTIFICACIÓN",
+hint:"Y sabes que puedes hacerlo mejor.",
 image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
 features:[
 {icon:"alert-circle",text:"Frustración"},
 {icon:"trending-down",text:"Estancamiento"}
 ]
 },
-
 {
 title:"La Trampa del Ciclo",
 text:"Ingresas dinero, pagas cuentas y vuelves a empezar.\nEl sistema está creado para mantenerte en este ciclo sin fin.",
 icon:"refresh-cw",
 badge:"EL CICLO",
+hint:"No es casualidad.",
 image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80",
 features:[
 {icon:"repeat",text:"Ciclo Infinito"},
 {icon:"wallet",text:"Sin Ahorro"}
 ]
 },
-
 {
 title:"Tu Nuevo Mantra",
 text:"Con nuestro sistema 50-30-20\nSabes exactamente a dónde va tu dinero y\ndesaparece la incertidumbre.",
 icon:"brain-circuit",
 badge:"HÁBITOS PRO",
+hint:"Claridad reemplaza ansiedad.",
 image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
 features:[
 {icon:"target",text:"Decisiones Claras"},
 {icon:"bar-chart-3",text:"Estrategia"}
 ]
 },
-
 {
 title:"Adiós al Estrés",
 text:"Imagina revisar tu celular y ver cuánto puedes gastar sin culpa y sin afectar tu ahorro.",
 icon:"coins",
 badge:"SOLUCIÓN",
+hint:"Eso es libertad financiera real.",
 image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80",
 features:[
 {icon:"shield-check",text:"Ahorro Automático"},
 {icon:"check-circle",text:"Control Total"}
 ]
 },
-
 {
 title:"Paz en Tiempo Real",
 text:"Cuando ves tu avance crecer con números claros,\nla confianza reemplaza el miedo y desaparece.",
 icon:"layout-dashboard",
 badge:"CLARIDAD",
+hint:"El control cambia todo.",
 image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
 features:[
 {icon:"activity",text:"Progreso Visible"},
 {icon:"smile",text:"Confianza"}
 ]
 },
-
 {
 title:"Con Finance PRO todo esto es posible",
 text:"La intención no crea libertad financiera.\nLa acción que haces hoy, sí.",
 icon:"rocket",
 badge:"TU MOMENTO",
+hint:"Tu siguiente decisión importa.",
 type:"cta",
 image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
 }
-
 ];
 
 let currentSlide=0;
@@ -260,19 +266,17 @@ setTimeout(()=>document.getElementById("badge").classList.add("show"),100);
 setTimeout(()=>document.getElementById("icon-container").classList.add("show"),250);
 setTimeout(()=>document.getElementById("title").classList.add("show"),400);
 setTimeout(()=>document.getElementById("description").classList.add("show"),550);
+setTimeout(()=>document.getElementById("bottomHint").classList.add("show"),900);
 
 document.querySelectorAll(".feature-card").forEach((card,i)=>{
 setTimeout(()=>card.classList.add("show"),700+(i*150));
 });
-
-if(!document.getElementById("cta-section").classList.contains("hidden")){
-setTimeout(()=>document.getElementById("cta-section").classList.add("show"),700);
-}
 }
 
 function updateSlide(){
 progress=0;
 resetAnimations();
+document.getElementById("bottomHint").classList.remove("show");
 
 const slide=slides[currentSlide];
 
@@ -280,6 +284,7 @@ document.getElementById("bg-image").src=slide.image;
 document.getElementById("badge").innerText=slide.badge;
 document.getElementById("title").innerText=slide.title;
 document.getElementById("description").innerText=slide.text;
+document.getElementById("bottomHint").innerText=slide.hint;
 
 document.getElementById("icon-container").innerHTML=
 `<i data-lucide="${slide.icon}" class="w-16 h-16"></i>`;
@@ -327,9 +332,6 @@ if(currentSlide<slides.length-1) currentSlide++;
 }
 updateSlide();
 });
-
-document.addEventListener("mousedown",()=>paused=true);
-document.addEventListener("mouseup",()=>paused=false);
 
 setInterval(()=>{
 if(paused) return;
