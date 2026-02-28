@@ -30,7 +30,7 @@ body{
     }
 }
 
-/* Zoom más sutil */
+/* Fondo zoom */
 @keyframes subtleZoom{
     from{transform:scale(1);}
     to{transform:scale(1.05);}
@@ -39,22 +39,54 @@ body{
     animation:subtleZoom 14s linear infinite;
 }
 
-/* Fade slide */
-.fade-enter{
+/* ===== ANIMACIONES NUEVAS ===== */
+
+.fade-up{
     opacity:0;
-    transform:translateY(20px);
+    transform:translateY(30px);
 }
-.fade-enter-active{
+.fade-up.show{
+    opacity:1;
+    transform:translateY(0);
+    transition:all .7s cubic-bezier(.16,1,.3,1);
+}
+
+.fade-down{
+    opacity:0;
+    transform:translateY(-20px);
+}
+.fade-down.show{
     opacity:1;
     transform:translateY(0);
     transition:all .6s ease;
 }
 
+.zoom-in{
+    opacity:0;
+    transform:scale(.85);
+}
+.zoom-in.show{
+    opacity:1;
+    transform:scale(1);
+    transition:all .6s cubic-bezier(.16,1,.3,1);
+}
+
+.feature-card{
+    opacity:0;
+    transform:translateY(25px);
+}
+.feature-card.show{
+    opacity:1;
+    transform:translateY(0);
+    transition:all .6s cubic-bezier(.16,1,.3,1);
+}
+
+/* Progress */
 .progress-bar{
     transition:width 40ms linear;
 }
 
-/* Botón premium */
+/* CTA glow */
 @keyframes glow{
     0%{box-shadow:0 0 20px rgba(139,92,246,.4);}
     50%{box-shadow:0 0 45px rgba(139,92,246,1);}
@@ -77,35 +109,31 @@ class="relative w-full max-w-[430px] bg-black overflow-hidden md:rounded-[40px]"
 <div class="absolute inset-0 bg-black/60"></div>
 </div>
 
-<!-- Progress bars -->
+<!-- Progress -->
 <div id="progress-container"
 class="absolute top-3 left-3 right-3 flex gap-1 z-50"></div>
 
 <!-- Content -->
-<div class="relative z-10 h-full px-6 pt-16 pb-10 flex flex-col justify-start text-center">
-
-<div id="content-wrapper" class="flex flex-col gap-6">
+<div class="relative z-10 h-full px-6 pt-16 pb-10 flex flex-col text-center">
 
 <span id="badge"
-class="self-center px-6 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
+class="fade-down self-center px-6 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
 </span>
 
-<div id="icon-container" class="flex justify-center text-white"></div>
+<div id="icon-container"
+class="zoom-in flex justify-center text-white mt-4"></div>
 
 <h1 id="title"
-class="text-3xl font-black text-white leading-tight">
-</h1>
+class="fade-up text-3xl font-black text-white leading-tight mt-4"></h1>
 
 <p id="description"
-class="text-white/85 text-sm leading-relaxed">
-</p>
+class="fade-up text-white/85 text-sm leading-relaxed whitespace-pre-line mt-2"></p>
 
 <div id="features-container"
-class="grid grid-cols-2 gap-4 mt-2">
-</div>
+class="grid grid-cols-2 gap-4 mt-6"></div>
 
 <div id="cta-section"
-class="flex flex-col items-center gap-3 mt-6 hidden">
+class="fade-up hidden flex flex-col items-center gap-3 mt-8">
 
 <p class="text-white font-semibold text-base">
 Empieza a ver resultados reales con FINANCE PRO
@@ -125,9 +153,10 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 
 </div>
 </div>
-</div>
 
 <script>
+
+/* ===== RESTAURADAS TODAS LAS PANTALLAS ===== */
 
 const slides=[
 
@@ -136,39 +165,59 @@ title:"¿Sientes que no te alcanza el dinero?",
 text:"Trabajas duro.\nCumples con todo.\nPero al final del mes sientes que no avanzas.",
 icon:"help-circle",
 badge:"IDENTIFICACIÓN",
-image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"alert-circle",text:"Frustración"},
+{icon:"trending-down",text:"Estancamiento"}
+]
 },
 
 {
 title:"La Trampa del Ciclo",
-text:"Ingresas dinero, pagas cuentas y vuelves a empezar.\nEl sistema está creado para mantenerte ahí.",
+text:"Ingresas dinero, pagas cuentas y vuelves a empezar.\nEl sistema está creado para mantenerte en este ciclo sin fin.",
 icon:"refresh-cw",
 badge:"EL CICLO",
-image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"repeat",text:"Ciclo Infinito"},
+{icon:"wallet",text:"Sin Ahorro"}
+]
 },
 
 {
 title:"Tu Nuevo Mantra",
-text:"Con nuestro sistema 50-30-20 sabes exactamente a dónde va tu dinero.",
+text:"Con nuestro sistema 50-30-20\nSabes exactamente a dónde va tu dinero y\ndesaparece la incertidumbre.",
 icon:"brain-circuit",
 badge:"HÁBITOS PRO",
-image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"target",text:"Decisiones Claras"},
+{icon:"bar-chart-3",text:"Estrategia"}
+]
 },
 
 {
 title:"Adiós al Estrés",
-text:"Imagina revisar tu celular y saber cuánto puedes gastar sin culpa.",
+text:"Imagina revisar tu celular y ver cuánto puedes gastar sin culpa y sin afectar tu ahorro.",
 icon:"coins",
 badge:"SOLUCIÓN",
-image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"shield-check",text:"Ahorro Automático"},
+{icon:"check-circle",text:"Control Total"}
+]
 },
 
 {
 title:"Paz en Tiempo Real",
-text:"Cuando ves tu avance crecer con números claros,\nla confianza aumenta y el miedo desaparece.",
+text:"Cuando ves tu avance crecer con números claros,\nla confianza reemplaza el miedo y desaparece.",
 icon:"layout-dashboard",
 badge:"CLARIDAD",
-image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"activity",text:"Progreso Visible"},
+{icon:"smile",text:"Confianza"}
+]
 },
 
 {
@@ -202,18 +251,29 @@ container.appendChild(base);
 });
 }
 
-function updateProgressUI(){
-slides.forEach((_,i)=>{
-const bar=document.getElementById("bar-"+i);
-if(!bar) return;
-if(i < currentSlide) bar.style.width="100%";
-else if(i===currentSlide) bar.style.width=progress+"%";
-else bar.style.width="0%";
+function resetAnimations(){
+document.querySelectorAll(".show").forEach(el=>el.classList.remove("show"));
+}
+
+function animateElements(){
+setTimeout(()=>document.getElementById("badge").classList.add("show"),100);
+setTimeout(()=>document.getElementById("icon-container").classList.add("show"),250);
+setTimeout(()=>document.getElementById("title").classList.add("show"),400);
+setTimeout(()=>document.getElementById("description").classList.add("show"),550);
+
+document.querySelectorAll(".feature-card").forEach((card,i)=>{
+setTimeout(()=>card.classList.add("show"),700+(i*150));
 });
+
+if(!document.getElementById("cta-section").classList.contains("hidden")){
+setTimeout(()=>document.getElementById("cta-section").classList.add("show"),700);
+}
 }
 
 function updateSlide(){
 progress=0;
+resetAnimations();
+
 const slide=slides[currentSlide];
 
 document.getElementById("bg-image").src=slide.image;
@@ -224,29 +284,46 @@ document.getElementById("description").innerText=slide.text;
 document.getElementById("icon-container").innerHTML=
 `<i data-lucide="${slide.icon}" class="w-16 h-16"></i>`;
 
+const featuresContainer=document.getElementById("features-container");
+featuresContainer.innerHTML="";
+
+if(slide.features){
+slide.features.forEach(f=>{
+const card=document.createElement("div");
+card.className="feature-card bg-white/10 backdrop-blur-md rounded-2xl p-4 flex flex-col items-center gap-2 border border-white/20";
+card.innerHTML=`
+<i data-lucide="${f.icon}" class="w-6 h-6 text-purple-400"></i>
+<span class="text-white text-xs font-semibold text-center">
+${f.text}
+</span>
+`;
+featuresContainer.appendChild(card);
+});
+}
+
 document.getElementById("cta-section")
 .classList.toggle("hidden", slide.type!=="cta");
 
 lucide.createIcons();
-
-const wrapper=document.getElementById("content-wrapper");
-wrapper.classList.remove("fade-enter-active");
-wrapper.classList.add("fade-enter");
-
-setTimeout(()=>{
-wrapper.classList.add("fade-enter-active");
-},50);
-
+animateElements();
 updateProgressUI();
+}
+
+function updateProgressUI(){
+slides.forEach((_,i)=>{
+const bar=document.getElementById("bar-"+i);
+if(i < currentSlide) bar.style.width="100%";
+else if(i===currentSlide) bar.style.width=progress+"%";
+else bar.style.width="0%";
+});
 }
 
 document.addEventListener("click",function(e){
 if(e.target.closest("a")) return;
-
 if(e.clientX < window.innerWidth/2){
-if(currentSlide>0){currentSlide--;}
+if(currentSlide>0) currentSlide--;
 }else{
-if(currentSlide<slides.length-1){currentSlide++;}
+if(currentSlide<slides.length-1) currentSlide++;
 }
 updateSlide();
 });
@@ -256,7 +333,6 @@ document.addEventListener("mouseup",()=>paused=false);
 
 setInterval(()=>{
 if(paused) return;
-
 progress+=step;
 if(progress>=100){
 progress=0;
