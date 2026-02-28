@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance PRO - Control Total</title>
+<title>Finance PRO</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -67,34 +67,33 @@ class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden 
 <div id="progress-container"
 class="absolute top-4 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<div class="flex-1 relative z-10 px-6 py-8 sm:px-8 sm:py-12 flex">
+<div class="flex-1 relative z-10 px-6 py-8 flex">
 
-<div class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full">
+<div class="w-full max-w-md mx-auto flex flex-col justify-center items-center text-center h-full">
 
 <div class="flex flex-col items-center gap-6 w-full">
 
 <span id="badge"
-class="h-8 px-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white whitespace-nowrap">
+class="h-8 px-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white">
 </span>
 
 <div id="icon-container"
 class="flex items-center justify-center text-white"></div>
 
 <h1 id="title"
-class="font-black tracking-tight leading-tight text-3xl sm:text-4xl text-white whitespace-pre-line">
+class="font-black leading-tight text-3xl text-white whitespace-pre-line">
 </h1>
 
 <p id="description"
-class="text-white/80 leading-relaxed text-sm whitespace-pre-line">
+class="text-white/80 text-sm whitespace-pre-line">
 </p>
 
 <div id="features-container"
 class="w-full grid grid-cols-2 gap-4 mt-4">
 </div>
 
-</div>
-
-<div class="flex flex-col items-center gap-3 w-full justify-end">
+<!-- CTA MÁS ARRIBA -->
+<div class="flex flex-col items-center gap-3 w-full mt-6">
 
 <p id="highlight-text"
 class="text-white font-bold text-base hidden">
@@ -103,7 +102,7 @@ Empieza a ver resultados reales con FINANCE PRO
 
 <a id="cta-button"
 href="https://my-finance-pro.web.app/"
-class="premium-button hidden bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 transition-all text-lg border border-white/20">
+class="premium-button hidden bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 text-lg border border-white/20">
 Conocer Finance PRO
 <i data-lucide="arrow-right" class="w-6 h-6"></i>
 </a>
@@ -122,66 +121,6 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 <script>
 
 const slides=[
-
-{
-title:"¿Sientes que no te alcanza el dinero?",
-text:"Trabajas duro.\nCumples con todo.\n\nPero al final del mes,\nsientes que no avanzas.",
-icon:"help-circle",
-badge:"IDENTIFICACIÓN",
-image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
-features:[
-{icon:"alert-circle",text:"Frustración"},
-{icon:"trending-down",text:"Estancamiento"}
-]
-},
-
-{
-title:"La Trampa del Ciclo",
-text:"Ingresas dinero, pagas cuentas y vuelves a empezar.\nEl sistema está creado para mantenerte en este ciclo sin fin.",
-icon:"refresh-cw",
-badge:"EL CICLO",
-image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80",
-features:[
-{icon:"repeat",text:"Ciclo Infinito"},
-{icon:"wallet",text:"Sin Ahorro"}
-]
-},
-
-{
-title:"Tu Nuevo Mantra",
-text:"Con nuestro sistema 50-30-20\nSabes exactamente a dónde va tu dinero y\ndesaparece la incertidumbre.",
-icon:"brain-circuit",
-badge:"HÁBITOS PRO",
-image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
-features:[
-{icon:"target",text:"Decisiones Claras"},
-{icon:"bar-chart-3",text:"Estrategia"}
-]
-},
-
-{
-title:"Adiós al Estrés",
-text:"Imagina revisar tu celular y ver cuánto puedes gastar\nsin culpa y sin afectar tu ahorro.",
-icon:"coins",
-badge:"SOLUCIÓN",
-image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80",
-features:[
-{icon:"shield-check",text:"Ahorro Automático"},
-{icon:"check-circle",text:"Control de Deudas"}
-]
-},
-
-{
-title:"Paz en Tiempo Real",
-text:"Cuando ves tu avance crecer con números claros,\nla confianza aumenta y el miedo desaparece.",
-icon:"layout-dashboard",
-badge:"CLARIDAD",
-image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
-features:[
-{icon:"activity",text:"Progreso Visible"},
-{icon:"smile",text:"Confianza"}
-]
-},
 
 {
 title:"Con Finance PRO todo esto es posible",
@@ -217,9 +156,7 @@ function updateProgressUI(){
 slides.forEach((_,i)=>{
 const bar=document.getElementById("bar-"+i);
 if(!bar) return;
-if(i < currentSlide){ bar.style.width="100%"; }
-else if(i === currentSlide){ bar.style.width=progress+"%"; }
-else{ bar.style.width="0%"; }
+if(i===currentSlide){ bar.style.width=progress+"%"; }
 });
 }
 
@@ -235,57 +172,18 @@ document.getElementById("description").innerText=slide.text;
 document.getElementById("icon-container").innerHTML=
 `<i data-lucide="${slide.icon}" class="w-20 h-20 animate-pulse"></i>`;
 
-const featuresContainer=document.getElementById("features-container");
-featuresContainer.innerHTML="";
-
-if(slide.features){
-slide.features.forEach(f=>{
-const card=document.createElement("div");
-card.className="bg-black/60 backdrop-blur-md rounded-3xl p-5 flex flex-col items-center justify-center gap-3 border border-white/10 shadow-xl";
-card.innerHTML=`
-<i data-lucide="${f.icon}" class="w-7 h-7 text-purple-400"></i>
-<span class="text-white text-[11px] font-bold tracking-widest uppercase text-center">
-${f.text}
-</span>
-`;
-featuresContainer.appendChild(card);
-});
-}
-
 lucide.createIcons();
 
-document.getElementById("highlight-text").classList.toggle("hidden", slide.type!=="cta");
-document.getElementById("cta-button").classList.toggle("hidden", slide.type!=="cta");
-document.getElementById("cta-subtext").classList.toggle("hidden", slide.type!=="cta");
+document.getElementById("highlight-text").classList.remove("hidden");
+document.getElementById("cta-button").classList.remove("hidden");
+document.getElementById("cta-subtext").classList.remove("hidden");
 
 updateProgressUI();
 }
 
-document.addEventListener("click", function(e){
-if(e.target.closest("a")) return;
-
-if(e.clientX < window.innerWidth/2){
-if(currentSlide>0){
-currentSlide--;
-updateSlide();
-}
-}else{
-if(currentSlide<slides.length-1){
-currentSlide++;
-updateSlide();
-}
-}
-});
-
 setInterval(()=>{
 progress+=step;
-if(progress>=100){
-progress=0;
-if(currentSlide<slides.length-1){
-currentSlide++;
-updateSlide();
-}
-}
+if(progress>=100){progress=0;}
 updateProgressUI();
 },40);
 
