@@ -161,7 +161,7 @@ features:[
 
 {
 title:"Adiós al Estrés",
-text:"Imagina revisar tu celular y sentir tranquilidad.",
+text:"Imagina revisar tu celular y ver cuánto puedes gastar\nsin culpa y sin afectar tu ahorro.",
 icon:"coins",
 badge:"SOLUCIÓN",
 image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80",
@@ -242,7 +242,6 @@ if(slide.features){
 slide.features.forEach(f=>{
 const card=document.createElement("div");
 card.className="bg-black/60 backdrop-blur-md rounded-3xl p-6 flex flex-col items-center justify-center gap-4 border border-white/10 shadow-xl";
-
 card.innerHTML=`
 <i data-lucide="${f.icon}" class="w-8 h-8 text-purple-400"></i>
 <span class="text-white text-xs font-bold tracking-widest uppercase text-center">
