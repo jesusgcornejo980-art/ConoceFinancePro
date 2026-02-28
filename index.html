@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finance PRO</title>
+<title>Finance PRO Story</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
 
 body{
     font-family:'Inter',sans-serif;
@@ -30,87 +30,96 @@ body{
     }
 }
 
-@keyframes subtle-zoom{
+/* Zoom más sutil */
+@keyframes subtleZoom{
     from{transform:scale(1);}
-    to{transform:scale(1.1);}
+    to{transform:scale(1.05);}
 }
 .animate-zoom{
-    animation:subtle-zoom 12s linear infinite;
+    animation:subtleZoom 14s linear infinite;
+}
+
+/* Fade slide */
+.fade-enter{
+    opacity:0;
+    transform:translateY(20px);
+}
+.fade-enter-active{
+    opacity:1;
+    transform:translateY(0);
+    transition:all .6s ease;
 }
 
 .progress-bar{
     transition:width 40ms linear;
 }
 
-@keyframes premiumPulse{
-    0%{box-shadow:0 0 25px rgba(139,92,246,.4);}
-    50%{box-shadow:0 0 60px rgba(139,92,246,1);}
-    100%{box-shadow:0 0 25px rgba(139,92,246,.4);}
+/* Botón premium */
+@keyframes glow{
+    0%{box-shadow:0 0 20px rgba(139,92,246,.4);}
+    50%{box-shadow:0 0 45px rgba(139,92,246,1);}
+    100%{box-shadow:0 0 20px rgba(139,92,246,.4);}
 }
-
 .premium-button{
-    animation:premiumPulse 2.5s ease-in-out infinite;
+    animation:glow 2.5s ease-in-out infinite;
 }
 </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-2">
+<body class="flex items-center justify-center">
 
 <div id="main-container"
-class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col">
+class="relative w-full max-w-[430px] bg-black overflow-hidden md:rounded-[40px]">
 
-<div class="absolute inset-0 z-0 pointer-events-none">
+<!-- Background -->
+<div class="absolute inset-0 z-0">
 <img id="bg-image" class="w-full h-full object-cover animate-zoom">
-<div class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
+<div class="absolute inset-0 bg-black/60"></div>
 </div>
 
+<!-- Progress bars -->
 <div id="progress-container"
-class="absolute top-4 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
+class="absolute top-3 left-3 right-3 flex gap-1 z-50"></div>
 
-<div class="flex-1 relative z-10 px-6 py-8 flex">
+<!-- Content -->
+<div class="relative z-10 h-full px-6 pt-16 pb-10 flex flex-col justify-start text-center">
 
-<div class="w-full max-w-md mx-auto flex flex-col justify-center items-center text-center h-full">
-
-<div class="flex flex-col items-center gap-6 w-full">
+<div id="content-wrapper" class="flex flex-col gap-6">
 
 <span id="badge"
-class="h-8 px-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white">
+class="self-center px-6 py-1 text-[10px] font-bold tracking-widest uppercase rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-white">
 </span>
 
-<div id="icon-container"
-class="flex items-center justify-center text-white"></div>
+<div id="icon-container" class="flex justify-center text-white"></div>
 
 <h1 id="title"
-class="font-black leading-tight text-3xl text-white whitespace-pre-line">
+class="text-3xl font-black text-white leading-tight">
 </h1>
 
 <p id="description"
-class="text-white/80 text-sm whitespace-pre-line">
+class="text-white/85 text-sm leading-relaxed">
 </p>
 
 <div id="features-container"
-class="w-full grid grid-cols-2 gap-4 mt-4">
+class="grid grid-cols-2 gap-4 mt-2">
 </div>
 
-<!-- CTA MÁS ARRIBA -->
-<div class="flex flex-col items-center gap-3 w-full mt-6">
+<div id="cta-section"
+class="flex flex-col items-center gap-3 mt-6 hidden">
 
-<p id="highlight-text"
-class="text-white font-bold text-base hidden">
+<p class="text-white font-semibold text-base">
 Empieza a ver resultados reales con FINANCE PRO
 </p>
 
-<a id="cta-button"
-href="https://my-finance-pro.web.app/"
-class="premium-button hidden bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-black py-4 px-10 rounded-full flex items-center gap-3 text-lg border border-white/20">
+<a href="https://my-finance-pro.web.app/"
+class="premium-button bg-gradient-to-r from-purple-600 to-indigo-700 text-white font-bold py-4 px-10 rounded-full flex items-center gap-3 text-lg">
 Conocer Finance PRO
-<i data-lucide="arrow-right" class="w-6 h-6"></i>
+<i data-lucide="arrow-right" class="w-5 h-5"></i>
 </a>
 
-<div id="cta-subtext"
-class="text-white/60 text-xs hidden">
+<p class="text-white/60 text-xs">
 Empieza hoy. Sin riesgos. Sin complicaciones.
-</div>
+</p>
 
 </div>
 
@@ -123,8 +132,48 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 const slides=[
 
 {
+title:"¿Sientes que no te alcanza el dinero?",
+text:"Trabajas duro.\nCumples con todo.\nPero al final del mes sientes que no avanzas.",
+icon:"help-circle",
+badge:"IDENTIFICACIÓN",
+image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+title:"La Trampa del Ciclo",
+text:"Ingresas dinero, pagas cuentas y vuelves a empezar.\nEl sistema está creado para mantenerte ahí.",
+icon:"refresh-cw",
+badge:"EL CICLO",
+image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+title:"Tu Nuevo Mantra",
+text:"Con nuestro sistema 50-30-20 sabes exactamente a dónde va tu dinero.",
+icon:"brain-circuit",
+badge:"HÁBITOS PRO",
+image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+title:"Adiós al Estrés",
+text:"Imagina revisar tu celular y saber cuánto puedes gastar sin culpa.",
+icon:"coins",
+badge:"SOLUCIÓN",
+image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
+},
+
+{
+title:"Paz en Tiempo Real",
+text:"Cuando ves tu avance crecer con números claros,\nla confianza aumenta y el miedo desaparece.",
+icon:"layout-dashboard",
+badge:"CLARIDAD",
+image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+},
+
+{
 title:"Con Finance PRO todo esto es posible",
-text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera,\nel movimiento que haces hoy, sí.",
+text:"La intención no crea libertad financiera.\nLa acción que haces hoy, sí.",
 icon:"rocket",
 badge:"TU MOMENTO",
 type:"cta",
@@ -135,6 +184,7 @@ image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&
 
 let currentSlide=0;
 let progress=0;
+let paused=false;
 const duration=8000;
 const step=(40/duration)*100;
 
@@ -143,7 +193,7 @@ const container=document.getElementById("progress-container");
 container.innerHTML="";
 slides.forEach((_,i)=>{
 const base=document.createElement("div");
-base.className="h-[3px] flex-1 bg-white/20 rounded-full overflow-hidden";
+base.className="h-[2px] flex-1 bg-white/30 rounded-full overflow-hidden";
 const fill=document.createElement("div");
 fill.id="bar-"+i;
 fill.className="h-full bg-white progress-bar w-0";
@@ -156,7 +206,9 @@ function updateProgressUI(){
 slides.forEach((_,i)=>{
 const bar=document.getElementById("bar-"+i);
 if(!bar) return;
-if(i===currentSlide){ bar.style.width=progress+"%"; }
+if(i < currentSlide) bar.style.width="100%";
+else if(i===currentSlide) bar.style.width=progress+"%";
+else bar.style.width="0%";
 });
 }
 
@@ -170,20 +222,49 @@ document.getElementById("title").innerText=slide.title;
 document.getElementById("description").innerText=slide.text;
 
 document.getElementById("icon-container").innerHTML=
-`<i data-lucide="${slide.icon}" class="w-20 h-20 animate-pulse"></i>`;
+`<i data-lucide="${slide.icon}" class="w-16 h-16"></i>`;
+
+document.getElementById("cta-section")
+.classList.toggle("hidden", slide.type!=="cta");
 
 lucide.createIcons();
 
-document.getElementById("highlight-text").classList.remove("hidden");
-document.getElementById("cta-button").classList.remove("hidden");
-document.getElementById("cta-subtext").classList.remove("hidden");
+const wrapper=document.getElementById("content-wrapper");
+wrapper.classList.remove("fade-enter-active");
+wrapper.classList.add("fade-enter");
+
+setTimeout(()=>{
+wrapper.classList.add("fade-enter-active");
+},50);
 
 updateProgressUI();
 }
 
+document.addEventListener("click",function(e){
+if(e.target.closest("a")) return;
+
+if(e.clientX < window.innerWidth/2){
+if(currentSlide>0){currentSlide--;}
+}else{
+if(currentSlide<slides.length-1){currentSlide++;}
+}
+updateSlide();
+});
+
+document.addEventListener("mousedown",()=>paused=true);
+document.addEventListener("mouseup",()=>paused=false);
+
 setInterval(()=>{
+if(paused) return;
+
 progress+=step;
-if(progress>=100){progress=0;}
+if(progress>=100){
+progress=0;
+if(currentSlide<slides.length-1){
+currentSlide++;
+updateSlide();
+}
+}
 updateProgressUI();
 },40);
 
