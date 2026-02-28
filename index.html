@@ -67,12 +67,11 @@ class="relative w-full max-w-[440px] bg-black md:rounded-[4rem] overflow-hidden 
 <div id="progress-container"
 class="absolute top-6 left-0 right-0 px-6 flex gap-1.5 z-50"></div>
 
-<!-- ✅ CAMBIO SOLICITADO: overflow-hidden -->
 <div class="flex-1 relative z-10 px-8 py-16 flex overflow-hidden">
 
-<div class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full">
+<div class="w-full max-w-md mx-auto flex flex-col justify-between items-center text-center h-full overflow-hidden">
 
-<div class="flex flex-col items-center gap-8">
+<div class="flex flex-col items-center gap-8 w-full">
 
 <span id="badge"
 class="h-8 px-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 text-[10px] font-black tracking-[0.3em] uppercase text-white whitespace-nowrap">
@@ -88,6 +87,11 @@ class="font-black tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl 
 <p id="description"
 class="text-white/80 leading-relaxed text-sm sm:text-base whitespace-pre-line">
 </p>
+
+<!-- NUEVAS TARJETAS -->
+<div id="features-container"
+class="w-full grid grid-cols-2 gap-4 mt-6">
+</div>
 
 </div>
 
@@ -119,41 +123,67 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 <script>
 
 const slides=[
+
 {
 title:"¿Sientes el Peso?",
-text:"•Trabajas             •Te esfuerzas\n•Luchas                •Cumples\n\nY aun así sientes que el dinero no alcanza.\nEsa ansiedad silenciosa antes de revisar tu cuenta no es casualidad.\nEs el resultado de no tener control real.",
+text:"•Trabajas             •Te esfuerzas\n•Luchas                •Cumples\n\nY aun así sientes que el dinero no alcanza.",
 icon:"clock",
 badge:"EL PESO DIARIO",
-image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"alert-circle",text:"Estrés Financiero"},
+{icon:"trending-down",text:"Falta de Control"}
+]
 },
+
 {
 title:"La Trampa del Ciclo",
-text:"Ingresas dinero… pagas cuentas… vuelves a empezar. Sin ahorro sólido. Sin crecimiento. Sin avance real.",
+text:"Ingresas dinero… pagas cuentas… vuelves a empezar.",
 icon:"refresh-cw",
 badge:"EL CICLO",
-image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"repeat",text:"Ciclo Infinito"},
+{icon:"wallet",text:"Sin Ahorro"}
+]
 },
+
 {
 title:"Tu Nuevo Mantra",
-text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre. Cada decisión se vuelve estratégica.",
+text:"Cuando sabes exactamente a dónde va tu dinero, desaparece la incertidumbre.",
 icon:"brain-circuit",
 badge:"HÁBITOS PRO",
-image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"target",text:"Decisiones Claras"},
+{icon:"bar-chart-3",text:"Estrategia"}
+]
 },
+
 {
 title:"Adiós al Estrés",
-text:"Nuestro sistema 50-30-20\n\nImagina revisar tu celular y sentir tranquilidad. Saber que puedes gastar sin culpa.",
+text:"Nuestro sistema 50-30-20\nImagina revisar tu celular y sentir tranquilidad.",
 icon:"coins",
 badge:"SOLUCIÓN",
-image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1604594849809-dfedbc827105?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"shield-check",text:"Ahorro Automático"},
+{icon:"check-circle",text:"Control de Deudas"}
+]
 },
+
 {
 title:"Paz en Tiempo Real",
-text:"Cuando ves tu avance crecer, algo cambia en tu mente. La confianza reemplaza el miedo.",
+text:"Cuando ves tu avance crecer, la confianza reemplaza el miedo.",
 icon:"layout-dashboard",
 badge:"CLARIDAD",
-image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
+image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+features:[
+{icon:"activity",text:"Progreso Visible"},
+{icon:"smile",text:"Confianza"}
+]
 },
+
 {
 title:"Con Finance PRO todo esto es posible",
 text:"Intención sin acción no tiene valor.\nLa intención no crea libertad financiera, el movimiento que haces hoy, sí.",
@@ -162,6 +192,7 @@ badge:"TU MOMENTO",
 type:"cta",
 image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
 }
+
 ];
 
 let currentSlide=0;
@@ -187,7 +218,6 @@ function updateProgressUI(){
 slides.forEach((_,i)=>{
 const bar=document.getElementById("bar-"+i);
 if(!bar) return;
-
 if(i < currentSlide){ bar.style.width="100%"; }
 else if(i === currentSlide){ bar.style.width=progress+"%"; }
 else{ bar.style.width="0%"; }
@@ -205,6 +235,28 @@ document.getElementById("description").innerText=slide.text;
 
 document.getElementById("icon-container").innerHTML=
 `<i data-lucide="${slide.icon}" class="w-20 h-20 sm:w-24 sm:h-24 animate-pulse"></i>`;
+
+const featuresContainer=document.getElementById("features-container");
+featuresContainer.innerHTML="";
+
+if(slide.features){
+slide.features.forEach(f=>{
+const card=document.createElement("div");
+card.className="bg-black/60 backdrop-blur-md rounded-3xl p-6 flex flex-col items-center justify-center gap-4 border border-white/10 shadow-xl";
+
+card.innerHTML=`
+<i data-lucide="${f.icon}" class="w-8 h-8 text-purple-400"></i>
+<span class="text-white text-xs font-bold tracking-widest uppercase text-center">
+${f.text}
+</span>
+`;
+
+featuresContainer.appendChild(card);
+});
+}else{
+featuresContainer.innerHTML="";
+}
+
 lucide.createIcons();
 
 document.getElementById("highlight-text").classList.toggle("hidden", slide.type!=="cta");
@@ -214,30 +266,15 @@ document.getElementById("cta-subtext").classList.toggle("hidden", slide.type!=="
 updateProgressUI();
 }
 
-function nextSlide(){
-if(currentSlide<slides.length-1){
-currentSlide++;
-updateSlide();
-}
-}
-
-function prevSlide(){
-if(currentSlide>0){
-currentSlide--;
-updateSlide();
-}
-}
-
 document.addEventListener("click", function(e){
 if(e.target.closest("a")) return;
 const width = window.innerWidth;
-if(e.clientX < width/2){ prevSlide(); }
-else{ nextSlide(); }
+if(e.clientX < width/2 && currentSlide>0){ currentSlide--; updateSlide(); }
+else if(e.clientX >= width/2 && currentSlide<slides.length-1){ currentSlide++; updateSlide(); }
 });
 
 setInterval(()=>{
 if(currentSlide >= slides.length-1 && progress>=100) return;
-
 progress+=step;
 if(progress>=100){
 progress=100;
