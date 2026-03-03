@@ -30,7 +30,6 @@ body{
     }
 }
 
-/* Fondo zoom */
 @keyframes subtleZoom{
     from{transform:scale(1);}
     to{transform:scale(1.05);}
@@ -39,52 +38,43 @@ body{
     animation:subtleZoom 14s linear infinite;
 }
 
-/* ===== ANIMACIONES NUEVAS ===== */
+/* Animaciones existentes (NO modificadas) */
+.fade-up{opacity:0;transform:translateY(30px);}
+.fade-up.show{opacity:1;transform:translateY(0);transition:all .7s cubic-bezier(.16,1,.3,1);}
 
-.fade-up{
+.fade-down{opacity:0;transform:translateY(-20px);}
+.fade-down.show{opacity:1;transform:translateY(0);transition:all .6s ease;}
+
+.zoom-in{opacity:0;transform:scale(.85);}
+.zoom-in.show{opacity:1;transform:scale(1);transition:all .6s cubic-bezier(.16,1,.3,1);}
+
+.feature-card{opacity:0;transform:translateY(25px);}
+.feature-card.show{opacity:1;transform:translateY(0);transition:all .6s cubic-bezier(.16,1,.3,1);}
+
+/* NUEVO micro mensaje */
+.micro-message{
     opacity:0;
-    transform:translateY(30px);
+    transform:translateY(20px);
 }
-.fade-up.show{
+.micro-message.show{
     opacity:1;
     transform:translateY(0);
-    transition:all .7s cubic-bezier(.16,1,.3,1);
+    transition:all .8s cubic-bezier(.16,1,.3,1);
 }
 
-.fade-down{
-    opacity:0;
-    transform:translateY(-20px);
-}
-.fade-down.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:all .6s ease;
-}
-
-.zoom-in{
-    opacity:0;
-    transform:scale(.85);
-}
-.zoom-in.show{
-    opacity:1;
-    transform:scale(1);
-    transition:all .6s cubic-bezier(.16,1,.3,1);
-}
-
-.feature-card{
-    opacity:0;
-    transform:translateY(25px);
-}
-.feature-card.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:all .6s cubic-bezier(.16,1,.3,1);
+/* Fade inferior elegante */
+.bottom-fade{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:160px;
+    background:linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    pointer-events:none;
 }
 
 /* Progress */
-.progress-bar{
-    transition:width 40ms linear;
-}
+.progress-bar{transition:width 40ms linear;}
 
 /* CTA glow */
 @keyframes glow{
@@ -92,9 +82,8 @@ body{
     50%{box-shadow:0 0 45px rgba(139,92,246,1);}
     100%{box-shadow:0 0 20px rgba(139,92,246,.4);}
 }
-.premium-button{
-    animation:glow 2.5s ease-in-out infinite;
-}
+.premium-button{animation:glow 2.5s ease-in-out infinite;}
+
 </style>
 </head>
 
@@ -103,17 +92,15 @@ body{
 <div id="main-container"
 class="relative w-full max-w-[430px] bg-black overflow-hidden md:rounded-[40px]">
 
-<!-- Background -->
 <div class="absolute inset-0 z-0">
 <img id="bg-image" class="w-full h-full object-cover animate-zoom">
 <div class="absolute inset-0 bg-black/60"></div>
+<div class="bottom-fade"></div>
 </div>
 
-<!-- Progress -->
 <div id="progress-container"
 class="absolute top-3 left-3 right-3 flex gap-1 z-50"></div>
 
-<!-- Content -->
 <div class="relative z-10 h-full px-6 pt-16 pb-10 flex flex-col text-center">
 
 <span id="badge"
@@ -131,6 +118,11 @@ class="fade-up text-white/85 text-sm leading-relaxed whitespace-pre-line mt-2"><
 
 <div id="features-container"
 class="grid grid-cols-2 gap-4 mt-6"></div>
+
+<!-- NUEVO MICRO MENSAJE -->
+<div id="micro-message"
+class="micro-message text-white/70 text-xs tracking-wide mt-auto mb-6 hidden">
+</div>
 
 <div id="cta-section"
 class="fade-up hidden flex flex-col items-center gap-3 mt-8">
@@ -155,8 +147,6 @@ Empieza hoy. Sin riesgos. Sin complicaciones.
 </div>
 
 <script>
-
-/* ===== RESTAURADAS TODAS LAS PANTALLAS ===== */
 
 const slides=[
 
@@ -231,6 +221,14 @@ image:"https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&
 
 ];
 
+const microMessages=[
+"No es falta de esfuerzo.",
+"El ciclo no se rompe solo.",
+"El orden crea poder.",
+"Menos culpa. Más libertad.",
+"Lo que se mide, mejora."
+];
+
 let currentSlide=0;
 let progress=0;
 let paused=false;
@@ -264,6 +262,11 @@ setTimeout(()=>document.getElementById("description").classList.add("show"),550)
 document.querySelectorAll(".feature-card").forEach((card,i)=>{
 setTimeout(()=>card.classList.add("show"),700+(i*150));
 });
+
+const micro=document.getElementById("micro-message");
+if(!micro.classList.contains("hidden")){
+setTimeout(()=>micro.classList.add("show"),900);
+}
 
 if(!document.getElementById("cta-section").classList.contains("hidden")){
 setTimeout(()=>document.getElementById("cta-section").classList.add("show"),700);
@@ -299,6 +302,15 @@ ${f.text}
 `;
 featuresContainer.appendChild(card);
 });
+}
+
+const micro=document.getElementById("micro-message");
+
+if(currentSlide < 5){
+micro.innerText=microMessages[currentSlide];
+micro.classList.remove("hidden");
+}else{
+micro.classList.add("hidden");
 }
 
 document.getElementById("cta-section")
